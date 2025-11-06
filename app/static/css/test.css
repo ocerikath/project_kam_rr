@@ -1,0 +1,57 @@
+@media (max-width: 480px) {
+    .modal-rw {
+      padding: clamp(4px, 1vw, 8px);
+    }
+  
+    .modal-content-rw {
+      width: clamp(280px, 92vw, 400px);
+      padding: clamp(0.8rem, 2vw, 1.2rem);
+    }
+  
+    .reviews-list-rw {
+      grid-auto-columns: clamp(150px, 80vw, 200px);
+      gap: clamp(8px, 1.5vw, 16px);
+      padding: clamp(6px, 1.2vw, 10px) clamp(10px, 2vw, 16px);
+    }
+    
+    .review-card-rw {
+      height: clamp(260px, 50vh, 420px);
+      padding: clamp(8px, 1.5vw, 12px);
+    }
+    
+    .carousel-wrapper-rw {
+      gap: clamp(0.3rem, 1vw, 0.6rem);
+    }
+    
+    .carousel-arrow-rw {
+      width: clamp(28px, 4.5vw, 36px);
+      height: clamp(28px, 4.5vw, 36px);
+      font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+    }
+    
+    .review-text-box-rw {
+      padding: clamp(8px, 1.5vw, 12px);
+    }
+    
+    .review-text-rw {
+      font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+      -webkit-line-clamp: 8;
+    }
+    
+    .review-name-rw {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+    }
+    
+    .review-service-rw {
+      font-size: clamp(0.9rem, 2vw, 1rem);
+    }
+    
+    .more-rw {
+      bottom: clamp(6px, 1.2vw, 10px);
+      right: clamp(6px, 1.2vw, 10px);
+    }
+  
+    .full-review-content-rw {
+      max-height: calc(100% - clamp(2.5rem, 5vw, 3.5rem));
+    }
+  }

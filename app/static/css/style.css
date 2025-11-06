@@ -1,0 +1,676 @@
+/* Цвета */
+:root {
+    --bg-main: #EAE6DC;
+    --bg-secondary: #D9D9D9;
+    --bg-neutral: #D9D9D9;
+
+    --card-bg: #CFC8BA;
+    --card-bg-dark: #A89B8C;
+
+    --text-heading: #4A4440;
+    --text-main: #3E3E3E;
+    --text-muted: #A8947C;
+
+    --btn-bg: #8F735B;
+    --btn-hover: #CFC8BA;
+    --btn-text: #F8F7F2;
+    --btn-text-hover: #3E3E3E;
+}
+
+/* Сброс базовых отступов и шрифтов */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+}
+html, body {
+    width: 100%;
+    min-width: 100vw;
+    max-width: 100vw;
+    overflow-x: hidden;
+    position: relative;
+}
+* {
+    box-sizing: border-box;
+}
+
+/* Шапка */
+header {
+    background-color: var(--bg-main);
+    border-bottom: 1px solid var(--bg-neutral);
+}
+
+.logo__name {
+    font-size: clamp(1.4vh, 3.5vw, 2.2vh) !important;
+    color: var(--text-heading);
+    line-height: 1.1;
+}
+
+.phone-number {
+    font-size: clamp(1.2vh, 3.5vw, 2vh);
+    color: #4A4440;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.phone-number:hover {
+    color: #8F735B;
+}
+
+
+
+.header-contacts {
+    font-size: clamp(1.2vh, 2.4vw, 2vh);
+}
+
+/* Мобильное меню */
+.mobile-header {
+    position: relative;
+    width: 100%;
+    height: 90px;
+    background-color: #D4CDBF;
+    z-index: 1000;
+}
+
+.mobile-menu-wrapper {
+    position: fixed;
+    
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: rgba(0, 0, 0, 0.1); /* прозрачный слой для клика вне меню */
+    overflow: hidden;
+    transition: height 0.3s ease;
+    z-index: 999;
+}
+
+.mobile-menu-wrapper.active {
+    position: absolute;
+    height: clamp(40vh, 45vh, 50vh); /* высота открытого меню */
+}
+
+.header-inner {
+    height: 100%;
+}
+
+#navbarMobile {
+    background-color: var(--bg-secondary);
+    padding: clamp(1vh, 2.5vw, 2vh);
+    border-top: 1px solid var(--bg-neutral);
+    height: 100%;
+}
+
+
+#navbarMobile .nav-link {
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: clamp(1.6vh, 4.5vw, 2.4vh);
+    padding: clamp(1.5vh, 4vw, 2.5vh) 0;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border-radius: 10px;
+}
+
+/* АНИМАЦИЯ НАЖАТИЯ ДЛЯ МОБИЛОК */
+@media (hover: none) {
+    #navbarMobile .nav-link:active {
+        color: #8f735b;
+        transform: scale(0.97);
+    }
+}
+
+
+#navbarMobile .nav-link,
+#navbarMobile .menu-messengers {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+#navbarMobile .nav-link.show,
+#navbarMobile .menu-messengers.show {
+    opacity: 1;
+
+}
+#navbarMobile .nav-link:hover {
+    color: var(--text-heading);
+}
+
+/* Мобильное меню: скрыто по умолчанию */
+.mobile-menu {
+    background-color: #E6DDC2;
+    height: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Активное состояние */
+.mobile-menu.active {
+    position: fixed;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+
+/* Ссылки в меню */
+.mobile-menu .nav-link {
+  font-size: clamp(1.5vh, 4vw, 2.2vh);
+  padding: clamp(0.8vh, 2vw, 1.4vh) 0;
+  color: #3E3E3E;
+  text-decoration: none;
+  transition: color 0.25s ease, transform 0.2s ease;
+  user-select: none;
+}
+
+.mobile-menu .nav-link:hover {
+  color: #8F735B;
+  transform: scale(1.05);
+}
+
+
+
+.menu-messengers {
+    margin-top: 4rem;
+    gap: 4rem;
+}
+
+.menu-messengers img {
+    width: clamp(2.5vh, 6vw, 3.5vh);
+    height: clamp(2.5vh, 6vw, 3.5vh);
+    transition: transform 0.2s ease;
+}
+
+.menu-messengers img:hover {
+    transform: scale(1.1);
+}
+
+.mobile-menu .nav-link:active {
+    color: #4A4440;
+    transform: scale(0.98);
+}
+
+/* Футер */
+footer {
+    background-color: var(--bg-neutral);
+    color: var(--text-main);
+    font-size: 0.9rem;
+}
+
+/* Убираем стандартную обводку фокуса у кастомных кнопок */
+.custom-burger-btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Отступы */
+main {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+
+
+/* Базовая структура SVG бургер */
+.burger-icon {
+    transition: transform 0.3s ease;
+}
+
+.burger-icon .line {
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+/* Состояние "открыт" */
+.burger-btn.open .top {
+    transform: translateY(10px) rotate(45deg);
+}
+
+.burger-btn.open .middle {
+    opacity: 0;
+}
+
+.burger-btn.open .bottom {
+    transform: translateY(-10px) rotate(-45deg);
+}
+
+.contact-info {
+    font-size: clamp(1.2vh, 2.4vw, 2vh);
+    line-height: 1.2;
+}
+
+.contact-info .phone-number {
+    color: var(--text-heading);
+    font-weight: 500;
+}
+
+.contact-info .messengers img {
+    height: clamp(1.6vh, 4vw, 3vh);
+}
+
+.burger-btn {
+    position: relative;
+    margin-top: clamp(0.3vh, 0.7vw, 1vh);
+    padding: clamp(1.8vh, 4vw, 3vh) !important;
+    z-index: 100;
+}
+@media (min-width:355px) {
+    .mobile-menu-wrapper.active {
+        position: absolute;
+        height: 50vh; /* высота открытого меню */
+    }
+}
+
+@media (min-width: 768px) {
+    .header-contacts {
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+}
+
+@media (min-width: 560px) {
+    .phone-number {
+        font-size: 0.95rem;
+    }
+    .messenger-icon {
+        height: 22px;
+    }
+    .header-contacts {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .messengers img.messenger-icon {
+        height: 22px;
+    }
+}
+
+/* Десктоп (от 992px): меню по центру, телефон справа, иконки под ним */
+@media (min-width: 992px) {
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%) scaleX(0);
+        transform-origin: center;
+        width: 100%;
+        height: 2px;
+        background-color: #8F735B; /* Акцентная линия */
+        transition: transform 0.3s ease;
+
+    }
+
+    .nav-link:hover::after {
+        transform: translateX(-50%) scaleX(1);
+    }
+
+    .nav-link:hover {
+        color: #8F735B;
+    }
+    .phone-number {
+        font-size: 1rem;
+    }
+    .messenger-icon {
+        height: 26px;
+    }
+    .desktop-nav .nav-link {
+        font-weight: 500;
+        color: var(--text-main);
+        margin-right: 3rem;
+    }
+    .desktop-nav .nav-link:hover {
+        color: var(--text-heading);
+    }
+    header .container {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .header-contacts {
+        gap: 0.25rem;
+        flex-direction: column;
+        align-items: flex-end;
+        text-align: right;
+    }
+
+    .header-contacts .phone-number {
+        font-size: 1rem;
+        margin-bottom: 4px;
+    }
+
+    .messengers img.messenger-icon {
+        height: 26px;
+    }
+
+    /* Убираем бургер на десктопе */
+    .burger-btn {
+        display: none !important;
+    }
+}
+
+.nav-link.active {
+    color: #8F735B;
+    font-weight: 600;
+}
+
+.nav-link.active::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+
+.footer {
+    background: #1a1a1a;
+    color: #ffffff;
+    padding: clamp(2rem, 5vw, 4rem) 0 clamp(1rem, 3vw, 2rem);
+    margin-top: auto;
+}
+
+.footer__container {
+    max-width: clamp(300px, 90vw, 1400px);
+    margin: 0 auto;
+    padding: 0 clamp(1rem, 4vw, 2rem);
+}
+
+.footer__content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: clamp(2rem, 4vw, 4rem);
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+    align-items: start;
+}
+
+/* Основная колонка с логотипом */
+.footer__column--main {
+    grid-column: 1;
+    max-width: clamp(300px, 35vw, 400px);
+}
+
+/* Контакты */
+.footer__column--contacts {
+    grid-column: 2;
+}
+
+/* Соцсети */
+.footer__column--social {
+    grid-column: 3;
+}
+
+/* Навигация - правая колонка */
+.footer__column--nav {
+    grid-column: 4;
+    text-align: right;
+}
+
+.footer__column {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+/* Логотип */
+.footer__logo {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.5rem, 2vw, 1rem);
+    text-decoration: none;
+    color: inherit;
+}
+
+.footer__logo-img {
+    width: clamp(40px, 8vw, 60px);
+    height: clamp(40px, 8vw, 60px);
+    object-fit: contain;
+}
+
+.footer__logo-text {
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #ffffff;
+}
+
+.footer__description {
+    color: #a0a0a0;
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* График работы */
+.footer__schedule {
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(0.5rem, 1.5vw, 0.75rem);
+}
+
+.footer__schedule-icon {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    flex-shrink: 0;
+}
+
+.footer__schedule-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.footer__schedule-info strong {
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    color: #ffffff;
+}
+
+.footer__schedule-info span {
+    font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+    color: #a0a0a0;
+}
+
+/* Заголовки */
+.footer__title {
+    font-size: clamp(1.125rem, 2vw, 1.25rem);
+    font-weight: 600;
+    margin: 0 0 clamp(1rem, 2vw, 1.5rem) 0;
+    color: #ffffff;
+}
+
+/* Навигация - выровнена по правому краю */
+.footer__nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.75rem, 1.5vw, 1rem);
+    align-items: flex-end;
+}
+
+.footer__nav-link {
+    color: #a0a0a0;
+    text-decoration: none;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    transition: color 0.3s ease;
+    line-height: 1.4;
+    text-align: right;
+}
+
+.footer__nav-link:hover {
+    color: #ffffff;
+}
+
+/* Контакты */
+.footer__contacts {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.footer__contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(0.5rem, 1.5vw, 0.75rem);
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    line-height: 1.4;
+    color: #a0a0a0;
+}
+
+.footer__contact-link {
+    color: #a0a0a0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(0.5rem, 1.5vw, 0.75rem);
+}
+
+.footer__contact-link:hover {
+    color: #ffffff;
+}
+
+.footer__contact-icon {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    flex-shrink: 0;
+}
+
+/* Соцсети */
+.footer__social {
+    display: flex;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    margin-bottom: clamp(0.75rem, 1.5vw, 1rem);
+}
+
+.footer__social-link {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.footer__social-link:hover {
+    transform: scale(1.1);
+}
+
+.footer__social-link img {
+    width: clamp(32px, 6vw, 40px);
+    height: clamp(32px, 6vw, 40px);
+    object-fit: contain;
+}
+
+.footer__social-text {
+    color: #a0a0a0;
+    font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Нижняя часть */
+.footer__bottom {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.footer__divider {
+    height: 1px;
+    background: #404040;
+    width: 100%;
+}
+
+.footer__copyright {
+    text-align: center;
+    color: #666666;
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    line-height: 1.4;
+}
+
+/* Медиа-запросы для планшетов */
+@media (max-width: 1024px) {
+    .footer__content {
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(2rem, 3vw, 3rem);
+    }
+    
+    .footer__column--main {
+        grid-column: 1 / -1;
+        max-width: none;
+        text-align: center;
+    }
+    
+    .footer__column--contacts {
+        grid-column: 1;
+        text-align: center;
+    }
+    
+    .footer__column--social {
+        grid-column: 2;
+        text-align: center;
+    }
+    
+    .footer__column--nav {
+        grid-column: 1 / -1;
+        text-align: center;
+    }
+    
+    .footer__nav {
+        align-items: center;
+    }
+    
+    .footer__logo {
+        justify-content: center;
+    }
+    
+    .footer__schedule {
+        justify-content: center;
+    }
+    
+    .footer__social {
+        justify-content: center;
+    }
+}
+
+/* Медиа-запросы для мобильных */
+@media (max-width: 768px) {
+    .footer__content {
+        grid-template-columns: 1fr;
+        gap: clamp(1.5rem, 3vw, 2rem);
+    }
+    
+    .footer__column--contacts,
+    .footer__column--social,
+    .footer__column--nav {
+        grid-column: 1;
+        text-align: center;
+    }
+    
+    .footer__nav {
+        align-items: center;
+    }
+    
+    .footer__contact-item,
+    .footer__contact-link {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: clamp(1.5rem, 4vw, 2rem) 0 clamp(1rem, 2vw, 1.5rem);
+    }
+    
+    .footer__container {
+        padding: 0 clamp(0.75rem, 3vw, 1rem);
+    }
+}
+
+/* Поддержка prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .footer__nav-link,
+    .footer__contact-link,
+    .footer__social-link {
+        transition: none;
+    }
+}

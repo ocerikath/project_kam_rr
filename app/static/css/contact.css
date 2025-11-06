@@ -1,0 +1,713 @@
+:root {
+  --text-main: #3E3E3E;
+  --bg-light: #EAE6DC;
+  --accent: #A8947C;
+  --btn-bg: #CFC8BA;
+  --btn-hover: #8F735B;
+  --overlay: rgba(0, 0, 0, 0.45);
+  --radius: clamp(0.8rem, 2vw, 1.5rem);
+}
+
+.hero {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+  min-height: clamp(40vh, 50vh, 60vh);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+
+  /* Убираем отступы */
+  margin-top: -2.5rem !important;
+  margin-bottom: -2.5rem !important;
+  
+  /* фон */
+  background-image: url("../images/site_images/karyer_test2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* затемнение */
+.hero__overlay {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--overlay);
+  z-index: 1;
+  backdrop-filter: brightness(0.8);
+}
+
+/* контент */
+.hero__content {
+  position: relative;
+  z-index: 2;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  max-width: 600px;
+  animation: fadeIn 1s ease-out;
+}
+
+/* заголовок */
+.hero__title {
+  font-size: clamp(2rem, 7vw, 3rem);
+  font-weight: 700;
+  margin-bottom: clamp(0.8rem, 3vw, 1.2rem);
+  line-height: 1.2;
+}
+
+/* подзаголовок */
+.hero__subtitle {
+  font-size: clamp(1rem, 3.5vw, 1.3rem);
+  margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ---------- Кнопки ---------- */
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 600;
+  padding: clamp(0.6rem, 2.5vw, 0.9rem) clamp(1.4rem, 6vw, 2.2rem);
+  border-radius: var(--radius);
+  transition: all 0.25s ease;
+  font-size: clamp(0.9rem, 3vw, 1rem);
+}
+
+.btn--primary {
+  background-color: var(--btn-bg);
+  color: var(--text-main);
+}
+
+.btn--primary:hover {
+  background-color: var(--btn-hover);
+  color: #fff;
+}
+
+.btn--secondary {
+  border: 1.5px solid var(--btn-bg);
+  color: #fff;
+  margin-left: clamp(0.8rem, 4vw, 1rem);
+}
+
+.btn--secondary:hover {
+  border-color: var(--btn-hover);
+  color: var(--btn-hover);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* ---------- Анимация ---------- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ---------- 2. Блок "О компании" ---------- */
+.about {
+  background-color: #EAE6DC;
+  color: #3E3E3E;
+  width: 100%;
+  padding: clamp(4rem, 6vw, 3.5rem) clamp(1rem, 5vw, 2rem);
+}
+
+.about__inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about__title {
+  font-size: clamp(1.6rem, 6vw, 2.2rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: clamp(1rem, 4vw, 1.8rem);
+  color: #3E3E3E;
+}
+
+.about__text {
+  font-size: clamp(1rem, 3.5vw, 1.15rem);
+  line-height: 1.6;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
+  text-align: justify;
+}
+
+.about__subtitle {
+  font-size: clamp(1.3rem, 4.5vw, 1.6rem);
+  font-weight: 600;
+  text-align: center;
+  margin-top: clamp(1.5rem, 5vw, 2rem);
+  margin-bottom: clamp(1.2rem, 4vw, 1.8rem);
+  color: #3E3E3E;
+}
+
+/* ---------- Преимущества ---------- */
+.advantages {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(0.8rem, 3vw, 1rem);
+}
+
+.adv-card {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.8rem, 3vw, 1rem);
+  background-image: url("../images/site_images/individual.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  border-radius: clamp(0.8rem, 2vw, 1rem);
+  padding: clamp(0.9rem, 3vw, 1.3rem);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.adv-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.adv-icon {
+  font-size: clamp(1.4rem, 5vw, 1.8rem);
+  color: #8F735B;
+  flex-shrink: 0;
+}
+
+.adv-text {
+  font-size: clamp(0.95rem, 3vw, 1.1rem);
+  color: #3E3E3E;
+}
+
+/* планшеты и выше */
+@media (min-width: 600px) {
+  .advantages {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Секция 3 "Наши достижения" */
+.achievements {
+  background: linear-gradient(180deg, #eae6dc 0%, #ffd478 100%);
+  padding: clamp(2rem, 6vw, 5rem) 0;
+  width: 100%;
+  border-radius: 20px;
+  margin-bottom: clamp(2rem, 6vw, 4rem);
+}
+
+.achievements__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2rem);
+  text-align: center;
+  color: #3E3E3E;
+}
+
+.achievements__title {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 700;
+  margin-bottom: clamp(1rem, 3vw, 2rem);
+}
+
+.achievements__items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(1.5rem, 5vw, 4rem);
+}
+
+.achievement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.achievement__number {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  color: #8F735B; /* акцент */
+  line-height: 1.1;
+}
+
+.achievement__text {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  margin-top: clamp(0.3rem, 1vw, 0.6rem);
+}
+
+/* Секция 4 "Как с нами связаться" */
+.contacts {
+  background-color: #DCD6C9;
+  padding: clamp(2rem, 6vw, 5rem) 0;
+  width: 100%;
+  color: #3E3E3E;
+  border-radius: 20px;
+}
+
+.contacts__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  text-align: center;
+}
+
+.contacts__title {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 700;
+}
+
+.contacts__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 45%, 400px), 1fr));
+  gap: clamp(1rem, 3vw, 2rem);
+  width: 100%;
+  max-width: 900px;
+}
+
+.contact-card {
+    background: #EAE6DC;
+    border-radius: 20px;
+    padding: clamp(1rem, 3vw, 2rem);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    margin: 10px;
+}
+
+.contact-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.contact-card__icon {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: clamp(0.5rem, 2vw, 1rem);
+}
+
+.contact-card__title {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-weight: 600;
+  margin-bottom: clamp(0.3rem, 1vw, 0.6rem);
+}
+
+.contact-card__info {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  line-height: 1.4;
+}
+
+
+/* Секция 5 "Свяжитесь с нами" */
+.feedback {
+  background-color: #EAE6DC;
+  color: #3E3E3E;
+  padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 5vw, 3rem);
+  width: 100%;
+}
+
+.feedback__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: clamp(2rem, 5vw, 4rem);
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.feedback__text {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.feedback__title {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 700;
+}
+
+.feedback__desc,
+.feedback__extra {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  line-height: 1.6;
+}
+
+.feedback__important {
+  background: rgba(62, 62, 62, 0.05);
+  padding: clamp(0.8rem, 2vw, 1rem);
+  border-left: 4px solid #8F735B;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  border-radius: 6px;
+}
+
+.feedback__phone {
+  display: block;
+  margin-top: 0.3em; /* небольшой отступ сверху для воздуха */
+  color: #8F735B;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.feedback__phone:hover {
+  text-decoration: underline;
+}
+
+.feedback__form {
+  flex: 1 1 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.feedback__form-placeholder {
+  width: 100%;
+  min-height: clamp(250px, 40vw, 400px);
+  background: #fff;
+  border: 2px dashed #CFC8BA;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #8F735B;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .feedback__container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .feedback__text,
+  .feedback__form {
+    flex: 1 1 100%;
+  }
+
+  .feedback__form-placeholder {
+    min-height: clamp(300px, 60vw, 400px);
+  }
+}
+
+
+.adv-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.8rem, 3vw, 1rem);
+  background-image: url("../images/site_images/individual.png");
+  background-size: cover;
+  background-position: center;
+  border-radius: clamp(0.8rem, 2vw, 1rem);
+  padding: clamp(0.9rem, 3vw, 1.3rem);
+  overflow: hidden; /* чтобы overlay не выходил за границы */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.adv-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+  transition: background 0.3s ease;
+}
+
+.adv-card:hover .overlay {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.adv-text {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  text-align: center;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+
+/* форма */
+#lead-section {
+  position: relative;
+  padding: clamp(2rem, 4vw, 3rem);
+  margin: 2rem auto 0;
+  background: #CBCAC7;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+#leadForm{
+  position: relative;
+  z-index: 100;
+}
+
+/* Табличка-за-формой */
+.form-background {
+  position: absolute;
+  top: 1rem;     /* отступ сверху */
+  left: 1rem;    /* отступ слева */
+  right: 1rem;   /* отступ справа */
+  bottom: 1rem;  /* отступ снизу */
+  
+  background: linear-gradient(
+    135deg,
+    #EAE6DC 0%, 
+    rgba(223, 216, 188, 0.2) 100%
+  );
+  
+  border-radius: clamp(0.75rem, 1.5vw, 1.25rem);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  
+  z-index: -1; /* ниже формы */
+}
+
+
+/* Заголовок */
+#lead-section h2 {
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-weight: 600;
+  color: #3E3e3e;
+  text-align: center;
+  margin-bottom: clamp(1.5rem, 2vw, 2rem);
+  letter-spacing: 0.02em;
+}
+
+/* Поля с иконками */
+.input-container {
+  position: relative;
+  margin-bottom: clamp(1.2rem, 2.5vw, 1.8rem);
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.input-container .icon {
+  position: absolute;
+  left: clamp(0.75rem, 1.5vw, 1rem);
+  top: 1rem; /* Фиксируем позицию относительно верха поля ввода */
+  width: auto;
+  height: clamp(1.2rem, 2.5vw, 1.6rem);
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  z-index: 1; /* Убедимся, что иконка остается над полем */
+}
+
+.input-container input,
+.input-container textarea {
+  padding: clamp(0.75rem, 1.5vw, 1rem) clamp(0.75rem, 1.5vw, 1rem) clamp(0.75rem, 1.5vw, 1rem) clamp(3rem, 5vw, 3.5rem);
+  width: 100%;
+  font-size: clamp(0.95rem, 1.2vw, 1rem);
+  border: 1px solid #8C7865;
+  border-radius: clamp(0.5rem, 1vw, 0.75rem);
+  background: #D4CDBF;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.input-container input:focus,
+.input-container textarea:focus {
+  outline: none;
+  border-color: #8C7865;
+  box-shadow: 0 0 8px rgba(140, 120, 101, 0.3);
+}
+
+.input-container input:focus + .icon,
+.input-container textarea:focus + .icon {
+  opacity: 1;
+}
+
+/* Комментарий */
+textarea {
+  resize: none;
+  min-height: clamp(100px, 15vw, 120px);
+}
+
+/* Ошибки */
+.field-error {
+  color: red;
+  font-size: clamp(0.75rem, 1vw, 0.85rem);
+  margin-top: clamp(0.3rem, 0.5vw, 0.5rem);
+  font-weight: 400;
+  text-align: left;
+}
+
+/* Чекбокс */
+.checkbox-container {
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+.custom-checkbox {
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  color: #333;
+  position: relative;
+}
+
+.custom-checkbox input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  margin-right: clamp(0.5rem, 1vw, 0.75rem);
+  width: clamp(1rem, 1.5vw, 1.2rem);
+  height: clamp(1rem, 1.5vw, 1.2rem);
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-top: clamp(0.1rem, 0.2vw, 0.15rem);
+  position: relative;
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+  background-color: #8C7865;
+  border-color: #8C7865;
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-text {
+  white-space: normal;
+  word-wrap: break-word;
+  line-height: 1.4;
+}
+
+.checkbox-container a {
+  color: #1100FF;
+  text-decoration: none;
+  transition: text-decoration 0.3s ease;
+  white-space: nowrap;
+}
+
+.checkbox-container a:hover {
+  text-decoration: underline;
+}
+
+/* Кнопка */
+#submitBtn {
+  padding: clamp(0.75rem, 1.5vw, 1rem) clamp(1.5rem, 3vw, 2rem);
+  font-size: clamp(1rem, 1.3vw, 1.1rem);
+  cursor: pointer;
+  border: none;
+  border-radius: clamp(0.5rem, 1vw, 0.75rem);
+  background: #8C7865;
+  color: #fff;
+  width: 100%;
+  font-weight: 500;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+#submitBtn:hover:not(:disabled) {
+  background: #736455;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(140, 120, 101, 0.3);
+}
+
+#submitBtn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Контакты */
+.contact-info-area {
+  background-color: #D4CDBF;
+  padding: clamp(1rem, 2vw, 2rem);
+  border-radius: clamp(0.5rem, 1vw, 1rem);
+}
+
+.contact-info-text ul {
+  list-style: none; /* убираем точки */
+  margin: 0;
+  padding: 0;
+}
+
+.contact-info-text li {
+  margin-bottom: clamp(0.5rem, 1vw, 1rem);
+}
+
+.contact-info-text p {
+  color: #4A4440;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  margin: 0;
+  font-weight: 500;
+}
+
+.phone-number-info,
+.email-adress-info {
+  color: #4A4440;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.phone-number-info:hover,
+.email-adress-info:hover {
+  color: #8F735B; /* лёгкий акцент при наведении */
+}
+
+
+
+/* Модальное окно */
+#modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: clamp(1.5rem, 3vw, 2rem);
+  background: #fff;
+  border: 1px solid #8C7865;
+  border-radius: clamp(0.75rem, 1.5vw, 1rem);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  max-width: clamp(280px, 85%, 450px);
+  text-align: center;
+}
+
+#modal p {
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  color: #333;
+}
+
+#modal button {
+  padding: clamp(0.6rem, 1.2vw, 0.9rem) clamp(1.5rem, 3vw, 2rem);
+  font-size: clamp(0.95rem, 1.2vw, 1rem);
+  cursor: pointer;
+  border: none;
+  border-radius: clamp(0.5rem, 1vw, 0.75rem);
+  background: #8C7865;
+  color: #fff;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#modal button:hover {
+  background: #736455;
+  transform: translateY(-2px);
+}
+

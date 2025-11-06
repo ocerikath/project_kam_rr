@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block title %}Контакты{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/contact.css') }}">
+{% endblock %}
+
+{% block content %}
+<!-- Секция 1 "Приветствие" -->
+<section class="hero">
+  <div class="hero__overlay"></div>
+  <div class="hero__content container">
+    <h1 class="hero__title">Свяжитесь с нами</h1>
+    <p class="hero__subtitle">
+      Мы доставляем нерудные материалы, выполняем дорожные работы и предоставляем спецтехнику. 
+      Надёжность и качество — наш приоритет.
+    </p>
+    <div class="hero__actions">
+      <a href="tel:+79265685900" class="btn btn--primary">Позвонить</a>
+      <a href="#contact-form" class="btn btn--secondary">Написать</a>
+    </div>
+  </div>
+</section>
+
+<!-- Секция 2 "О нас!" -->
+<section class="about">
+  <div class="about__inner">
+    <h2 class="about__title">О нашей компании</h2>
+    <p class="about__text">
+      Наша компания занимается доставкой нерудных материалов, выполнением дорожных работ и арендой спецтехники.
+      Мы работаем как с частными клиентами, так и с организациями, предоставляя надёжные и оперативные услуги.
+    </p>
+    <p class="about__text">
+      Мы ценим качество, точность и долгосрочные отношения. Более 10 лет мы помогаем клиентам решать задачи в сфере
+      строительства и благоустройства. Наш приоритет – удобство и прозрачность для заказчика на всех этапах
+      сотрудничества.
+    </p>
+
+    <h3 class="about__subtitle">Наши преимущества</h3>
+    <div class="advantages">
+      <div class="adv-card">
+          <div class="adv-overlay"></div>
+          <p class="adv-text">Профессиональная команда специалистов</p>
+      </div>
+
+      <div class="adv-card">
+          <div class="adv-overlay"></div>
+          <p class="adv-text">Современное оборудование</p>
+      </div>
+
+      <div class="adv-card">
+          <div class="adv-overlay"></div>
+          <p class="adv-text">Гибкие условия сотрудничества</p>
+      </div>
+
+      <div class="adv-card">
+          <div class="adv-overlay"></div>
+          <p class="adv-text">Соблюдение сроков</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Секция 3 "Наши достижения" -->
+<section class="achievements">
+  <div class="achievements__container">
+    <h2 class="achievements__title">Наши достижения</h2>
+    <div class="achievements__items">
+      <div class="achievement">
+        <span class="achievement__number">10+</span>
+        <span class="achievement__text">лет опыта</span>
+      </div>
+      <div class="achievement">
+        <span class="achievement__number">500+</span>
+        <span class="achievement__text">довольных клиентов</span>
+      </div>
+      <div class="achievement">
+        <span class="achievement__number">100%</span>
+        <span class="achievement__text">собственный автопарк</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Секция 4 "Как с нами связаться" -->
+<section class="contacts">
+  <div class="contacts__container">
+    <h2 class="contacts__title">Как с нами связаться</h2>
+    <div class="contacts__grid">
+      <div class="contact-card">
+        <div class="contact-card__icon">📞</div>
+        <h3 class="contact-card__title">Телефон</h3>
+        <p class="contact-card__info">+7 (926) 568-59-00</p>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card__icon">📧</div>
+        <h3 class="contact-card__title">Электронная почта</h3>
+        <p class="contact-card__info">pesko@sheben-order.ru</p>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card__icon">📍</div>
+        <h3 class="contact-card__title">Наше местоположение</h3>
+        <p class="contact-card__info">г. Пушкино</p>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card__icon">🕒</div>
+        <h3 class="contact-card__title">График работы</h3>
+        <p class="contact-card__info">Ежедневно: 07:00–21:00</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Секция 5 "Свяжитесь с нами" -->
+<section class="feedback" id="contact-form">
+  <div class="feedback__container">
+    <div class="feedback__text">
+      <h2 class="feedback__title">Свяжитесь с нами</h2>
+      <p class="feedback__desc">
+        Заполните форму, и наш менеджер свяжется с вами в ближайшее время.
+      </p>
+      <p class="feedback__extra">
+        Мы гарантируем конфиденциальность ваших данных и оперативную обработку обращений.
+        Обычно отвечаем в течение 30 минут в рабочее время.
+      </p>
+      <p class="feedback__important">
+        <strong>Важно:</strong> Для срочных вопросов рекомендуем звонить по телефону:
+        <a href="tel:+79265685900" class="feedback__phone">+7 (926) 568-59-00</a>
+      </p>
+    </div>
+
+    <div class="form-background fade-up"></div>
+
+    <form id="leadForm" class="fade-up" method="post" novalidate>
+      <h2 id="form-lead">Оставить заявку</h2>
+
+      <!-- Поле имя -->
+      <div class="input-container fade-up">
+        <img class="icon" src="{{ url_for('static', filename='images/icons/name.png') }}" alt="icon">
+        <input type="text" name="full_name" id="id_full_name" placeholder="Ваше имя" value="{{ form.full_name.value|default('') }}">
+        <div class="field-error"></div>
+      </div>
+
+      <!-- Поле телефон -->
+      <div class="input-container">
+        <img class="icon" src="{{ url_for('static', filename='images/icons/phone.png') }}" alt="icon">
+        <input type="text" name="phone" id="id_phone" placeholder="Телефон" value="{{ form.phone.value|default('') }}">
+        <div class="field-error"></div>
+      </div>
+
+      <!-- Поле email -->
+      <div class="input-container">
+        <img class="icon" src="{{ url_for('static', filename='images/icons/mail.png') }}" alt="icon">
+        <input type="email" name="email" id="id_email" placeholder="Email" value="{{ form.email.value|default('') }}">
+        <div class="field-error"></div>
+      </div>
+
+      <!-- Поле комментарий -->
+      <div class="input-container">
+        <img class="icon" src="{{ url_for('static', filename='images/icons/comment.png') }}" alt="icon">
+        <textarea name="comment" id="id_comment" placeholder="Комментарий">{{ form.comment.value|default('') }}</textarea>
+        <div class="field-error"></div>
+      </div>
+
+      <!-- Чекбокс согласия -->
+      <div class="checkbox-container">
+        <label class="custom-checkbox">
+          <input type="checkbox" id="consent">
+          <span class="checkmark"></span>
+          <span class="checkbox-text">
+            Согласен на <a href="#" target="_blank">обработку персональных данных</a>
+          </span>
+        </label>
+        <div class="field-error"></div>
+      </div>
+
+      <!-- Кнопка отправки -->
+      <button class="fade-up" type="submit" id="submitBtn" disabled>Отправить заявку</button>
+    </form>
+  </div>
+</section>
+
+<script src="{{ url_for('static', filename='js/lead_form.js') }}"></script>
+<script src="{{ url_for('static', filename='js/phone_mask.js') }}"></script>
+{% endblock %}

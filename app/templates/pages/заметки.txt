@@ -1,0 +1,35 @@
+async def send_lead_email(lead):
+    subject = f"Новая заявка от {lead.full_name}"
+    message = f"""
+Имя: {lead.full_name}
+Телефон: {lead.phone}
+Email: {lead.email or 'Не указан'}
+Товар: {lead.product_name or 'Не выбран'}
+Комментарий: {lead.comment or 'Нет'}
+"""
+    try:
+        await asyncio.to_thread(send_mail,
+            subject,
+            message,
+            settings.DEFAULT_FROM_EMAIL,
+            [settings.DEFAULT_FROM_EMAIL],  # Можно добавить список рассылки
+            fail_silently=False
+        )
+    except Exception as e:
+        print(f"Ошибка при отправке письма: {e}")
+
+@csrf_exempt  # на продакшене лучше убрать и использовать X-CSRFToken из JS
+def submit_lead(request):
+    if request.method == "POST":
+        form = LeadForm(request.POST)
+        if form.is_valid():
+            lead = form.save()
+
+            # Отправка письма асинхронно
+            asyncio.run(send_lead_email(lead))
+
+            return JsonResponse({"success": True, "message": "Заявка успешно отправлена!"})
+        else:
+            errors = {field: [str(e) for e in errs] for field, errs in form.errors.items()}
+            return JsonResponse({"success": False, "errors": errors})
+    return JsonResponse({"success": False, "message": "Неверный метод запроса"})

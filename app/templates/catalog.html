@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/catalog.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="catalog container">
+  <h1 class="catalog__title">Каталог</h1>
+
+  {% if categories %}
+    {% for category in categories %}
+      <div class="catalog__category">
+        <h2 class="catalog__category-title">{{ category.name }}</h2>
+
+        <div class="slider-container">
+          <!-- Кнопка назад -->
+          <button class="slider-arrow slider-arrow--prev" aria-label="Предыдущие товары">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <!-- Контейнер слайдера -->
+          <div class="catalog__products">
+            {% set has_products = false %}
+            {% for product in products %}
+              {% if product.category_id == category.id %}
+                {% set has_products = true %}
+                <div class="product-card" data-category="{{ category.name }}">
+                  <div class="product-card__image">
+                    {% if product.image %}
+                      <img src="{{ product.image_url }}" alt="{{ product.name }}">
+                    {% else %}
+                      <img src="{{ url_for('static', filename='images/site_images/no-image.jpg') }}" alt="Нет изображения">
+                    {% endif %}
+                  </div>
+
+                  <div class="product-card__info">
+                    <h3 class="product-card__name">{{ product.name }}</h3>
+                    <p class="product-card__price">от {{ product.price }} ₽</p>
+                  </div>
+
+                  <a href="{{ url_for('main.index') }}#feedback" class="product-card__btn">Заказать</a>
+                </div>
+              {% endif %}
+            {% endfor %}
+            {% if not has_products %}
+              
+            {% endif %}
+          </div>
+
+          <!-- Кнопка вперед -->
+          <button class="slider-arrow slider-arrow--next" aria-label="Следующие товары">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="empty-text">Категории пока не добавлены</p>
+  {% endif %}
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const sliderContainers = document.querySelectorAll('.slider-container');
+  
+  sliderContainers.forEach(container => {
+    const slider = container.querySelector('.catalog__products');
+    const prevBtn = container.querySelector('.slider-arrow--prev');
+    const nextBtn = container.querySelector('.slider-arrow--next');
+
+    const scrollAmount = () => {
+      const card = slider.querySelector('.product-card');
+      if (!card) return slider.clientWidth * 0.8;
+      return card.offsetWidth * 2 + parseInt(getComputedStyle(slider).gap) * 2;
+    };
+
+    nextBtn.addEventListener('click', () => {
+      slider.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+    });
+    
+    prevBtn.addEventListener('click', () => {
+      slider.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+    });
+
+    const updateArrows = () => {
+      const scrollLeft = slider.scrollLeft;
+      const scrollWidth = slider.scrollWidth;
+      const clientWidth = slider.clientWidth;
+
+      if (scrollLeft <= 10) prevBtn.classList.add('slider-arrow--hidden');
+      else prevBtn.classList.remove('slider-arrow--hidden');
+
+      if (scrollLeft + clientWidth >= scrollWidth - 10) nextBtn.classList.add('slider-arrow--hidden');
+      else nextBtn.classList.remove('slider-arrow--hidden');
+    };
+
+    slider.addEventListener('scroll', updateArrows);
+    updateArrows();
+    window.addEventListener('resize', updateArrows);
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener('mousedown', e => {
+      isDown = true;
+      slider.classList.add('active');
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('mouseleave', () => { isDown = false; slider.classList.remove('active'); });
+    slider.addEventListener('mouseup', () => { isDown = false; slider.classList.remove('active'); });
+    slider.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 2;
+      slider.scrollLeft = scrollLeft - walk;
+    });
+  });
+});
+</script>
+{% endblock %}

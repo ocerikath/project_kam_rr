@@ -1,0 +1,192 @@
+.catalog {
+  padding: clamp(1rem, 4vw, 2rem);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
+
+.catalog__title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--text-heading);
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+.catalog__category {
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  position: relative;
+}
+
+.catalog__category-title {
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  color: var(--text-heading);
+  margin-bottom: clamp(0.8rem, 2vw, 1rem);
+}
+
+/* Контейнер для слайдера со стрелочками */
+.slider-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Контейнер карточек */
+.catalog__products {
+  display: flex;
+  gap: clamp(0.8rem, 2vw, 1.2rem);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 0.5rem;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+}
+
+.catalog__products::-webkit-scrollbar {
+  display: none;
+}
+
+/* Карточка товара */
+.product-card {
+  flex: 0 0 40%;
+  background-color: var(--card-bg);
+  border-radius: 1.25rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  scroll-snap-align: start;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.product-card:hover {
+  background-color: var(--card-bg-dark);
+  transform: translateY(-2px);
+}
+
+/* Фото */
+.product-card__image img {
+  width: 100%;
+  height: clamp(130px, 35vw, 180px);
+  object-fit: cover;
+  display: block;
+}
+
+/* Информация */
+.product-card__info {
+  padding: clamp(0.6rem, 2vw, 1rem);
+  text-align: center;
+}
+
+.product-card__name {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: var(--text-heading);
+  margin-bottom: 0.3rem;
+}
+
+.product-card__price {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: rgb(0, 0, 0);
+}
+
+/* Кнопка */
+.product-card__btn {
+  display: block;
+  margin: clamp(0.6rem, 2vw, 1rem);
+  padding: clamp(0.5rem, 1.5vw, 0.7rem) clamp(0.8rem, 3vw, 1.2rem);
+  text-align: center;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  border-radius: 0.75rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  text-decoration: none;
+}
+
+.product-card__btn:hover {
+  background-color: var(--btn-hover);
+  color: var(--btn-text-hover);
+}
+
+.empty-text {
+  color: var(--text-muted);
+  font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+/* Стили для стрелок */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: var(--card-bg);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-heading);
+  z-index: 2;
+  transition: all 0.3s ease;
+  opacity: 0.9;
+}
+
+.slider-arrow:hover {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  transform: translateY(-50%) scale(1.1);
+  opacity: 1;
+}
+
+.slider-arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.slider-arrow--prev {
+  left: -20px;
+}
+
+.slider-arrow--next {
+  right: -20px;
+}
+
+.slider-arrow--hidden {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Адаптивность для стрелок */
+@media (max-width: 768px) {
+  .slider-arrow {
+    width: 36px;
+    height: 36px;
+    display: none; /* На мобильных скрываем стрелки */
+  }
+  
+  .slider-arrow--prev {
+    left: -15px;
+  }
+  
+  .slider-arrow--next {
+    right: -15px;
+  }
+}
+
+/* Для десктопов показываем стрелки */
+@media (min-width: 769px) {
+  .slider-arrow {
+    display: flex;
+  }
+}
+
+/* Курсоры для перетаскивания */
+.catalog__products {
+  cursor: grab;
+}
+
+.catalog__products.active {
+  cursor: grabbing;
+  user-select: none;
+}
