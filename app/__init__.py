@@ -9,7 +9,7 @@ mail = Mail()
 
 def create_app():
     # Загружаем .env только для локальной разработки
-    if os.environ.get("RAILWAY_ENVIRONMENT") is None:
+    if os.environ.get("RAILWAY_ENVIRONMENT") is None:  # Более надежная проверка
         load_dotenv()
 
     app = Flask(__name__)
@@ -19,16 +19,12 @@ def create_app():
     db.init_app(app)
     mail.init_app(app)
 
-    # ВРЕМЕННО закомментируем создание таблиц
-    # with app.app_context():
-    #     try:
-    #         db.engine.connect()
-    #         print("✅ Database connection successful")
-    #         db.create_all()  # Закомментируем эту строку
-    #     except Exception as e:
-    #         print(f"❌ Database connection failed: {e}")
-
+    # Импортируем и регистрируем blueprint
     from .routes import main_bp
     app.register_blueprint(main_bp)
+
+    # Создаем таблицы при запуске
+    with app.app_context():
+        db.create_all()
 
     return app
