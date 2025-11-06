@@ -2,7 +2,7 @@ import os
 import sys
 
 print("=" * 50)
-print("🚀 STARTING APPLICATION")
+print("🚀 STARTING APPLICATION WITH WAITRESS")
 print("=" * 50)
 
 # Выводим все переменные окружения
@@ -13,9 +13,10 @@ for key, value in os.environ.items():
 
 try:
     from flask import Flask
-    print("✅ Flask imported successfully")
+    from waitress import serve
+    print("✅ Flask and Waitress imported successfully")
 except Exception as e:
-    print(f"❌ Flask import failed: {e}")
+    print(f"❌ Import failed: {e}")
     sys.exit(1)
 
 app = Flask(__name__)
@@ -24,7 +25,7 @@ print("✅ Flask app created")
 @app.route('/')
 def hello():
     print("📥 GET / request received")
-    return 'HELLO FROM RAILWAY - FINALLY WORKS! 🎉'
+    return 'HELLO FROM RAILWAY WITH WAITRESS! 🎉'
 
 @app.route('/health')
 def health():
@@ -44,22 +45,22 @@ def debug():
     <p>PORT: {port}</p>
     <p>RAILWAY_ENVIRONMENT: {railway_env}</p>
     <p>RAILWAY_PUBLIC_DOMAIN: {public_domain}</p>
-    <p>Python version: {sys.version}</p>
+    <p>Server: Waitress</p>
+    <p>Status: WORKING! 🎉</p>
     """
 
 if __name__ == "__main__":
-    # Railway дает порт в переменной PORT, обычно это 8080 или подобный
     port = int(os.environ.get("PORT", 8080))
     print(f"🔧 Configuration:")
     print(f"   - Port: {port}")
     print(f"   - Public URL: {os.environ.get('RAILWAY_PUBLIC_DOMAIN')}")
     print(f"   - Environment: {os.environ.get('RAILWAY_ENVIRONMENT')}")
     
-    print(f"🚀 Starting Flask app on 0.0.0.0:{port}")
+    print(f"🚀 Starting Waitress server on 0.0.0.0:{port}")
     
     try:
-        app.run(host="0.0.0.0", port=port, debug=False)
-        print("✅ Flask app started successfully")
+        serve(app, host="0.0.0.0", port=port)
+        print("✅ Waitress server started successfully")
     except Exception as e:
-        print(f"❌ Failed to start Flask: {e}")
+        print(f"❌ Failed to start Waitress: {e}")
         sys.exit(1)
