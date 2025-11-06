@@ -4,9 +4,6 @@ from app.models import db
 
 app = create_app()
 
-# Создаем таблицы (если нужно)
-with app.app_context():
-    db.create_all()
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))  # Railway сам подставит порт
