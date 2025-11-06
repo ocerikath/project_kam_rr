@@ -9,11 +9,14 @@ mail = Mail()
 
 def create_app():
     # Загружаем .env только для локальной разработки
-    if os.environ.get("RAILWAY_ENVIRONMENT") is None:  # Более надежная проверка
+    if os.environ.get("RAILWAY_ENVIRONMENT") is None:
         load_dotenv()
 
     app = Flask(__name__)
     app.config.from_object(Config)
+
+    # Отладочная информация
+    print(f"Database URL: {app.config.get('SQLALCHEMY_DATABASE_URI', 'Not set')}")
 
     # Инициализируем расширения
     db.init_app(app)
@@ -23,8 +26,13 @@ def create_app():
     from .routes import main_bp
     app.register_blueprint(main_bp)
 
-    # Создаем таблицы при запуске
+    # Создаем таблицы при запуске (с обработкой ошибок)
     with app.app_context():
-        db.create_all()
+        try:
+            db.create_all()
+            print("✅ Database tables created successfully")
+        except Exception as e:
+            print(f"❌ Database connection failed: {e}")
+            print("⚠️ Continuing without database...")
 
     return app

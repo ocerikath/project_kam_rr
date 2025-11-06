@@ -2,8 +2,8 @@ import os
 import logging
 
 class Config:
-    # DATABASE - исправляем URL для Railway
-    database_url = os.environ.get("DATABASE_URL")
+    # DATABASE - используем PUBLIC URL для Railway
+    database_url = os.environ.get("DATABASE_PUBLIC_URL") or os.environ.get("DATABASE_URL")
     
     # Если DATABASE_URL начинается с postgres://, меняем на postgresql://
     if database_url and database_url.startswith("postgres://"):
