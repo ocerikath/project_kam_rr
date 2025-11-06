@@ -1,14 +1,13 @@
-# config.py
 import os
-import re
 import logging
 
 class Config:
-    # Исправляем DATABASE_URL для Railway
-    database_url = os.environ.get("DATABASE_URL", "")
-    if database_url:
-        if database_url.startswith("postgres://"):
-            database_url = database_url.replace("postgres://", "postgresql://", 1)
+    # DATABASE - исправляем URL для Railway
+    database_url = os.environ.get("DATABASE_URL")
+    
+    # Если DATABASE_URL начинается с postgres://, меняем на postgresql://
+    if database_url and database_url.startswith("postgres://"):
+        database_url = database_url.replace("postgres://", "postgresql://", 1)
     
     SQLALCHEMY_DATABASE_URI = database_url or "postgresql+psycopg2://postgres:Hovo2005@localhost:5432/project_kam"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -21,4 +20,5 @@ class Config:
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
     MAIL_DEFAULT_SENDER = os.environ.get("MAIL_DEFAULT_SENDER")
 
+    # Логирование
     LOG_LEVEL = logging.INFO

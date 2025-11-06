@@ -130,3 +130,14 @@ ID товара: {product_id or '-'}
         return jsonify({'success': False, 'message': 'Ошибка при отправке письма. Проверьте настройки SMTP.'})
 
     return jsonify({'success': True, 'message': 'Заявка успешно отправлена!'})
+
+
+@main_bp.route('/test-db')
+def test_db():
+    try:
+        # Простая проверка подключения к БД
+        with db.engine.connect() as conn:
+            result = conn.execute('SELECT 1')
+        return jsonify({"status": "success", "message": "Database connection working"})
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
