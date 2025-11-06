@@ -1,25 +1,8 @@
 import os
-from flask import Flask
+from app import create_app
 
-app = Flask(__name__)
-import sys
-try:
-    from flask import Flask, jsonify
-except Exception as e:
-    print(f"Import error: {e}")
-    sys.exit(1)
-@app.route('/')
-def hello():
-    return 'Hello World from Railway!'
-
-@app.route('/health')
-def health():
-    return 'OK', 200
-
-@app.route('/test')
-def test():
-    return f"Port: {os.environ.get('PORT')}"
+app = create_app()
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8080))  # Railway использует 8080
+    port = int(os.environ.get("PORT", 8080))
     app.run(host="0.0.0.0", port=port, debug=False)
