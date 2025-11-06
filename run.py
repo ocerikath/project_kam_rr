@@ -1,10 +1,9 @@
 import os
 from app import create_app
-from app.models import db
 
-app = create_app()
+app = create_app()  # Gunicorn будет использовать эту переменную
 
-
+# Только для локальной разработки
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))  # Railway сам подставит порт
-    app.run(host="0.0.0.0", port=port, debug=False)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)

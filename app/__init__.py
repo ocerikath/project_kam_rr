@@ -2,10 +2,16 @@ from flask import Flask
 from .models import db
 from flask_mail import Mail
 from config import Config
+import os
+from dotenv import load_dotenv
 
 mail = Mail()
 
 def create_app():
+    # Загружаем .env только локально
+    if os.environ.get("FLASK_ENV") != "production":
+        load_dotenv()
+
     app = Flask(__name__)
     app.config.from_object(Config)
 
