@@ -1,6 +1,7 @@
 # config.py
 import os
 import re
+import logging
 
 class Config:
     # Исправляем DATABASE_URL для Railway
