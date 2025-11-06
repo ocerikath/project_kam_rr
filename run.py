@@ -2,7 +2,12 @@ import os
 from flask import Flask
 
 app = Flask(__name__)
-
+import sys
+try:
+    from flask import Flask, jsonify
+except Exception as e:
+    print(f"Import error: {e}")
+    sys.exit(1)
 @app.route('/')
 def hello():
     return 'Hello World from Railway!'
