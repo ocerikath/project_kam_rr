@@ -1,7 +1,7 @@
 import os
 from app import create_app
 
-app = create_app()  # Gunicorn будет использовать эту переменную
+app = create_app()  # Gunicorn использует эту переменную
 
 # Только для локальной разработки
 if __name__ == "__main__":

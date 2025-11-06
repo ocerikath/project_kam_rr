@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 mail = Mail()
 
 def create_app():
-    # Загружаем .env только локально
+    # Загружаем .env только для локальной разработки
     if os.environ.get("FLASK_ENV") != "production":
         load_dotenv()
 
