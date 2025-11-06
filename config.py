@@ -9,7 +9,7 @@ class Config:
     if database_url and database_url.startswith("postgres://"):
         database_url = database_url.replace("postgres://", "postgresql://", 1)
     
-    SQLALCHEMY_DATABASE_URI = database_url or "postgresql+psycopg2://postgres:Hovo2005@localhost:5432/project_kam"
+    SQLALCHEMY_DATABASE_URI = database_url or "postgresql+psycopg://postgres:Hovo2005@localhost:5432/project_kam"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # MAIL
