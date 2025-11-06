@@ -5,9 +5,13 @@ class Config:
     # DATABASE - используем PUBLIC URL для Railway
     database_url = os.environ.get("DATABASE_PUBLIC_URL") or os.environ.get("DATABASE_URL")
     
-    # Если DATABASE_URL начинается с postgres://, меняем на postgresql://
-    if database_url and database_url.startswith("postgres://"):
-        database_url = database_url.replace("postgres://", "postgresql://", 1)
+    # Если DATABASE_URL начинается с postgres://, меняем на postgresql+psycopg://
+    if database_url:
+        if database_url.startswith("postgres://"):
+            database_url = database_url.replace("postgres://", "postgresql+psycopg://", 1)
+        elif database_url.startswith("postgresql://"):
+            # Явно указываем использовать psycopg (версия 3)
+            database_url = database_url.replace("postgresql://", "postgresql+psycopg://", 1)
     
     SQLALCHEMY_DATABASE_URI = database_url or "postgresql+psycopg://postgres:Hovo2005@localhost:5432/project_kam"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
