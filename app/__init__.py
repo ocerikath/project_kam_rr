@@ -21,6 +21,13 @@ def create_app():
     # Инициализируем расширения
     db.init_app(app)
     mail.init_app(app)
+    
+    @app.before_request
+    def redirect_to_www():
+        host = request.host
+        if not host.startswith('www.') and not host.startswith('localhost'):
+            new_url = request.url.replace('//', '//www.', 1)
+            return redirect(new_url, code=301)
 
     # Импортируем и регистрируем blueprint
     from .routes import main_bp
