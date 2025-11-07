@@ -132,12 +132,30 @@ ID товара: {product_id or '-'}
     return jsonify({'success': True, 'message': 'Заявка успешно отправлена!'})
 
 
-@main_bp.route('/test-db')
-def test_db():
+@app.route('/test-email-simple')
+def test_email_simple():
+    import smtplib
+    import os
+    
     try:
-        # Простая проверка подключения к БД
-        with db.engine.connect() as conn:
-            result = conn.execute('SELECT 1')
-        return jsonify({"status": "success", "message": "Database connection working"})
+        # Берем настройки из переменных окружения
+        server = os.environ.get('MAIL_SERVER', 'smtp.yandex.ru')
+        port = int(os.environ.get('MAIL_PORT', 465))
+        username = os.environ.get('MAIL_USERNAME')
+        password = os.environ.get('MAIL_PASSWORD')
+        use_ssl = os.environ.get('MAIL_USE_SSL', 'True').lower() == 'true'
+        
+        print(f"Connecting to {server}:{port} SSL:{use_ssl}")
+        
+        if use_ssl:
+            smtp = smtplib.SMTP_SSL(server, port, timeout=10)
+        else:
+            smtp = smtplib.SMTP(server, port, timeout=10)
+        
+        smtp.login(username, password)
+        smtp.quit()
+        
+        return "✓ SMTP connection SUCCESS!"
+        
     except Exception as e:
-        return jsonify({"status": "error", "message": str(e)}), 500
+        return f"✗ SMTP connection FAILED: {str(e)}"
