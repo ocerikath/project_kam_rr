@@ -159,3 +159,37 @@ def test_email_simple():
         
     except Exception as e:
         return f"✗ SMTP connection FAILED: {str(e)}"
+
+@main_bp.route('/test-email-ports')
+def test_email_ports():
+    import smtplib
+    import os
+    
+    # Yandex альтернативные порты
+    ports_to_test = [465, 587, 25, 2525, 8025, 5870]
+    
+    results = []
+    
+    for port in ports_to_test:
+        try:
+            server = os.environ.get('MAIL_SERVER', 'smtp.yandex.ru')
+            username = os.environ.get('MAIL_USERNAME')
+            password = os.environ.get('MAIL_PASSWORD')
+            
+            print(f"Testing port {port}...")
+            
+            # Для портов 465 используем SSL, для остальных - TLS
+            if port == 465:
+                smtp = smtplib.SMTP_SSL(server, port, timeout=10)
+            else:
+                smtp = smtplib.SMTP(server, port, timeout=10)
+                smtp.starttls()  # Включаем TLS
+                
+            smtp.login(username, password)
+            smtp.quit()
+            results.append(f"✓ Port {port}: SUCCESS")
+            
+        except Exception as e:
+            results.append(f"✗ Port {port}: FAILED - {str(e)[:100]}")
+    
+    return "<br>".join(results)
