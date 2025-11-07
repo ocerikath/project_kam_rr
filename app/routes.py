@@ -132,7 +132,7 @@ ID товара: {product_id or '-'}
     return jsonify({'success': True, 'message': 'Заявка успешно отправлена!'})
 
 
-@app.route('/test-email-simple')
+@main_bp.route('/test-email-simple')
 def test_email_simple():
     import smtplib
     import os
