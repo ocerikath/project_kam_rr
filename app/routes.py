@@ -132,64 +132,48 @@ ID товара: {product_id or '-'}
     return jsonify({'success': True, 'message': 'Заявка успешно отправлена!'})
 
 
-@main_bp.route('/test-email-simple')
-def test_email_simple():
+@app.route('/test-gmail')
+def test_gmail():
     import smtplib
     import os
     
-    try:
-        # Берем настройки из переменных окружения
-        server = os.environ.get('MAIL_SERVER', 'smtp.yandex.ru')
-        port = int(os.environ.get('MAIL_PORT', 465))
-        username = os.environ.get('MAIL_USERNAME')
-        password = os.environ.get('MAIL_PASSWORD')
-        use_ssl = os.environ.get('MAIL_USE_SSL', 'True').lower() == 'true'
-        
-        print(f"Connecting to {server}:{port} SSL:{use_ssl}")
-        
-        if use_ssl:
-            smtp = smtplib.SMTP_SSL(server, port, timeout=10)
-        else:
-            smtp = smtplib.SMTP(server, port, timeout=10)
-        
-        smtp.login(username, password)
-        smtp.quit()
-        
-        return "✓ SMTP connection SUCCESS!"
-        
-    except Exception as e:
-        return f"✗ SMTP connection FAILED: {str(e)}"
-
-@main_bp.route('/test-email-ports')
-def test_email_ports():
-    import smtplib
-    import os
-    
-    # Yandex альтернативные порты
-    ports_to_test = [465, 587, 25, 2525, 8025, 5870]
+    # Временно установите эти переменные в Railway
+    tests = [
+        {
+            'name': 'Gmail SSL',
+            'server': 'smtp.gmail.com', 
+            'port': 465,
+            'ssl': True,
+            'username': 'your@gmail.com',  # временно поставьте тестовый gmail
+            'password': 'your-app-password'
+        },
+        {
+            'name': 'Gmail TLS', 
+            'server': 'smtp.gmail.com',
+            'port': 587,
+            'ssl': False,
+            'tls': True,
+            'username': 'your@gmail.com',
+            'password': 'your-app-password'
+        }
+    ]
     
     results = []
     
-    for port in ports_to_test:
+    for test in tests:
         try:
-            server = os.environ.get('MAIL_SERVER', 'smtp.yandex.ru')
-            username = os.environ.get('MAIL_USERNAME')
-            password = os.environ.get('MAIL_PASSWORD')
-            
-            print(f"Testing port {port}...")
-            
-            # Для портов 465 используем SSL, для остальных - TLS
-            if port == 465:
-                smtp = smtplib.SMTP_SSL(server, port, timeout=10)
+            if test.get('ssl'):
+                smtp = smtplib.SMTP_SSL(test['server'], test['port'], timeout=10)
             else:
-                smtp = smtplib.SMTP(server, port, timeout=10)
-                smtp.starttls()  # Включаем TLS
-                
-            smtp.login(username, password)
+                smtp = smtplib.SMTP(test['server'], test['port'], timeout=10)
+                if test.get('tls'):
+                    smtp.starttls()
+            
+            smtp.login(test['username'], test['password'])
             smtp.quit()
-            results.append(f"✓ Port {port}: SUCCESS")
+            results.append(f"✓ {test['name']}: SUCCESS")
             
         except Exception as e:
-            results.append(f"✗ Port {port}: FAILED - {str(e)[:100]}")
+            results.append(f"✗ {test['name']}: {str(e)[:100]}")
     
     return "<br>".join(results)
