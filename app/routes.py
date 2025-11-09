@@ -50,21 +50,9 @@ def contact():
         db.session.add(lead)
         db.session.commit()
 
-        # Отправляем на почту
-        msg = Message(
-            subject=f"Новая заявка от {lead.full_name}",
-            recipients=["hovannes.chakhoyan@yandex.ru"],
-            body=f"""
-Имя: {lead.full_name}
-Телефон: {lead.phone}
-Email: {lead.email}
-Комментарий: {lead.comment}
-Продукт: {lead.product_name or '-'}
-"""
-        )
-        mail.send(msg)
+        # ОТПРАВКА НА ПОЧТУ УБРАНА
 
-        return jsonify({"success": True, "message": "Заявка успешно отправлена!"})
+        return jsonify({"success": True, "message": "Заявка успешно сохранена!"})
 
     # Для GET-запроса просто рендерим страницу
     from types import SimpleNamespace
@@ -75,6 +63,7 @@ Email: {lead.email}
         comment=SimpleNamespace(value='')
     )
     return render_template('contact.html', form=form)
+
 
 @main_bp.route('/submit-lead/', methods=['POST'])
 def submit_lead():
@@ -110,25 +99,6 @@ def submit_lead():
     db.session.add(lead)
     db.session.commit()
 
-    # Отправляем письмо
-    try:
-        msg = Message(
-            subject=f"Новая заявка от {full_name}",
-            recipients=["hovannes.chakhoyan@yandex.ru"],
-            body=f"""
-Имя: {full_name}
-Телефон: {phone}
-Email: {email}
-Комментарий: {comment}
-Товар/услуга: {product_name or '-'}
-ID товара: {product_id or '-'}
-"""
-        )
-        mail.send(msg)
-    except Exception as e:
-        print(f"Ошибка при отправке email: {e}")
-        return jsonify({'success': False, 'message': 'Ошибка при отправке письма. Проверьте настройки SMTP.'})
+    # ОТПРАВКА ПИСЕМ УБРАНА
 
-    return jsonify({'success': True, 'message': 'Заявка успешно отправлена!'})
-
-
+    return jsonify({'success': True, 'message': 'Заявка успешно сохранена!'})
