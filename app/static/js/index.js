@@ -413,9 +413,9 @@ function initInfiniteCarousel() {
   if (!track || slides.length === 0) return;
   
   // Рассчитываем общую ширину одного набора слайдов
-  let singleSetWidth = 0;
+  const gap = parseInt(getComputedStyle(track).gap) || 0;
   slides.forEach(slide => {
-    singleSetWidth += slide.offsetWidth + parseInt(getComputedStyle(track).gap);
+    singleSetWidth += slide.offsetWidth + gap;
   });
   
   // Клонируем слайды столько раз, чтобы заполнить экран + запас
@@ -461,14 +461,14 @@ function initInfiniteCarousel() {
   // Переинициализация при ресайзе
   window.addEventListener('resize', () => {
     cancelAnimationFrame(animationId);
-    // Очищаем клоны
-    const allSlides = track.querySelectorAll('.works-slide');
-    const originalSlides = Array.from(allSlides).slice(0, slides.length);
+    // Убираем старые клоны кроме оригинальных
+    const originals = Array.from(track.querySelectorAll('.works-slide')).slice(0, slides.length);
     track.innerHTML = '';
-    originalSlives.forEach(slide => track.appendChild(slide));
-    // Перезапускаем
-    setTimeout(initInfiniteCarousel, 100);
+    originals.forEach(slide => track.appendChild(slide));
+    // Перезапуск
+    initInfiniteCarousel();
   });
+  
 }
 
 document.addEventListener('DOMContentLoaded', initInfiniteCarousel);
