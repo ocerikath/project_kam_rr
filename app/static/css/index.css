@@ -1032,6 +1032,25 @@ textarea {
   color: #8F735B; /* лёгкий акцент при наведении */
 }
 
+/* Мобильный фикс для формы, чтобы страница не дергалась */
+@media (max-width: 768px) {
+  /* Убираем фиксированные отступы, делаем блок полностью адаптивным */
+  .feedback__container {
+    padding-bottom: env(safe-area-inset-bottom); /* для iOS */
+  }
+
+  #leadForm input,
+  #leadForm textarea {
+    font-size: 1rem; /* чуть больше, чтобы клавиатура не перекрывала */
+  }
+
+  /* Делаем форму полностью в потоке документа, убираем absolute / fixed */
+  #lead-section,
+  .form-background {
+    position: relative !important;
+  }
+}
+
 
 
 /* Модальное окно */

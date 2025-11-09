@@ -158,3 +158,21 @@ document.addEventListener("DOMContentLoaded", function() {
         modal.style.display = "none";
     });
 });
+
+// JS фикс для мобильных
+document.addEventListener("DOMContentLoaded", () => {
+    if (window.innerWidth <= 768) {
+      const feedbackSection = document.getElementById("feedback");
+      const inputs = feedbackSection.querySelectorAll("input, textarea");
+  
+      inputs.forEach(input => {
+        input.addEventListener("focus", () => {
+          // Прокручиваем страницу до самого блока формы, чтобы input был виден
+          setTimeout(() => {
+            input.scrollIntoView({ behavior: "smooth", block: "center" });
+          }, 300);
+        });
+      });
+    }
+  });
+  
