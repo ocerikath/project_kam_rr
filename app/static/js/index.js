@@ -64,183 +64,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-
-const slides_whyus = gsap.utils.toArray(".slide-whyus2");
+// Получаем все карточки
+const slides_whyus = document.querySelectorAll(".slide-whyus2");
 const section = document.querySelector(".why-us2");
-let animationCompleted = false;
 
-// Создаем контейнер для статической сетки (работает везде)
-const staticContainer = document.createElement('div');
-staticContainer.className = 'why-us2-static';
-staticContainer.style.display = 'none';
-section.parentNode.insertBefore(staticContainer, section.nextSibling);
+// Проверяем, что секция есть
+if (section && slides_whyus.length > 0) {
+  // Создаем контейнер для статической сетки
+  const staticContainer = document.createElement("div");
+  staticContainer.className = "why-us2-static";
 
-// Заполняем статический контейнер клонами карточек
-slides_whyus.forEach((slide) => {
-  const clone = slide.cloneNode(true);
-  clone.className = 'slide-whyus2-static';
-  clone.style.opacity = '1';
-  clone.style.visibility = 'visible';
-  clone.style.transform = 'none';
-  clone.style.filter = 'none';
-  staticContainer.appendChild(clone);
-});
-
-// --- Функция завершения анимации (универсальная) ---
-function completeAnimation(instant = false) {
-  if (animationCompleted) return;
-  animationCompleted = true;
-
-  document.body.style.overflow = '';
-
-  if (timeline_whyus) timeline_whyus.kill();
-  if (st_whyus) st_whyus.kill();
-
-  const pinSpacer = document.querySelector('.pin-spacer');
-  if (pinSpacer) pinSpacer.remove();
-
-  gsap.set(section, { autoAlpha: 0 });
-  section.style.height = '0';
-  section.style.minHeight = '0';
-  section.style.display = 'none';
-
-  staticContainer.style.display = 'grid';
-
-  if (instant) {
-    gsap.set(staticContainer, { autoAlpha: 1 });
-  } else {
-    gsap.fromTo(staticContainer,
-      { autoAlpha: 0 },
-      { autoAlpha: 1, duration: 0.8, ease: "power2.out" }
-    );
-  }
-
-  if (!instant) {
-    gsap.to(window, {
-      duration: 0.25,
-      scrollTo: { y: staticContainer, offsetY: 0 },
-      ease: "power2.out"
-    });
-  }
-
-  setTimeout(() => ScrollTrigger.refresh(), 200);
-}
-
-// --- Универсальный обработчик кнопки ---
-const scrollToLeadBtn = document.getElementById('scrollToLead');
-if (scrollToLeadBtn) {
-  scrollToLeadBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-
-    completeAnimation(true);
-
-    setTimeout(() => {
-      gsap.to(window, {
-        duration: 0.6,
-        scrollTo: "#lead-section",
-        ease: "power2.out"
-      });
-    }, 100);
-  });
-}
-
-// --- Ветка для мобильных устройств ---
-if (window.innerWidth < 992) {
-  // Начальное состояние карточек
-  gsap.set(slides_whyus, {
-    autoAlpha: 0,
-    y: "-120%",
-    scale: 0.9,
-    z: -600,
-    filter: "blur(8px)"
+  // Добавляем карточки в статический контейнер
+  slides_whyus.forEach((slide) => {
+    const clone = slide.cloneNode(true);
+    clone.className = "slide-whyus2-static";
+    staticContainer.appendChild(clone);
   });
 
-  // Таймлайн анимации
-  var timeline_whyus = gsap.timeline({
-    defaults: { ease: "power2.inOut" }
-  });
+  // Вставляем после исходной секции
+  section.parentNode.insertBefore(staticContainer, section.nextSibling);
 
-  slides_whyus.forEach((card) => {
-    timeline_whyus.to(card, {
-      autoAlpha: 1,
-      y: "0%",
-      scale: 1,
-      z: 0,
-      filter: "blur(0px)",
-      duration: 0.6
-    });
-    timeline_whyus.to({}, { duration: 0.25 });
-    timeline_whyus.to(card, {
-      autoAlpha: 0,
-      y: "120%",
-      scale: 0.9,
-      z: -600,
-      filter: "blur(8px)",
-      duration: 0.6
-    });
-    timeline_whyus.add(() => {
-      slides_whyus.forEach(c => c.classList.remove("is-active"));
-      card.classList.add("is-active");
-    }, "-=0.9");
-  });
+  // Скрываем оригинальную секцию
+  section.style.display = "none";
 
-  // ScrollTrigger
-  var st_whyus = ScrollTrigger.create({
-    animation: timeline_whyus,
-    trigger: ".why-us2",
-    start: "top top",
-    end: `+=${slides_whyus.length * window.innerHeight * 0.9}`,
-    scrub: 1,
-    pin: true,
-    anticipatePin: 1,
-    onEnter: () => {
-      document.body.style.overflow = 'hidden';
-    },
-    onUpdate: (self) => {
-      if (self.progress > 0.85 && !animationCompleted) {
-        completeAnimation();
-      }
-    },
-    onLeave: () => {
-      if (!animationCompleted) {
-        completeAnimation();
-      }
-      document.body.style.overflow = '';
-    }
-  });
-
-  // Обработчик быстрого скролла
-  let fastScrollTimeout;
-  window.addEventListener('wheel', () => {
-    if (animationCompleted) return;
-    clearTimeout(fastScrollTimeout);
-    fastScrollTimeout = setTimeout(() => {
-      if (st_whyus && st_whyus.progress > 1) {
-        completeAnimation();
-      }
-    }, 100);
-  }, { passive: true });
-
-  // Пересчёт при ресайзе
-  window.addEventListener("resize", () => {
-    if (!animationCompleted) {
-      ScrollTrigger.refresh();
-    }
-  });
-
-  // Учет "уменьшить анимацию"
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    completeAnimation();
-  }
-
-} else {
-  // --- Ветка для десктопа ---
-  // Просто показываем статичную версию
-  section.style.display = 'none';
-  staticContainer.style.display = 'grid';
-  staticContainer.style.opacity = '1';
-  gsap.set(staticContainer, { autoAlpha: 1 });
+  // Показываем статическую сетку
+  staticContainer.style.display = "grid";
+  staticContainer.style.opacity = "1";
 }
 
 
