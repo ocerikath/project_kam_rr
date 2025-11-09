@@ -176,3 +176,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const advTexts = document.querySelectorAll(".adv-text");
+    advTexts.forEach(el => {
+        el.style.display = "block"; // показываем элемент
+        el.style.opacity = 1;        // на случай, если была анимация fade
+    });
+});
