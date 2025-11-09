@@ -4,6 +4,7 @@ from flask_mail import Mail
 from config import Config
 import os
 from dotenv import load_dotenv
+from flask import send_from_directory
 
 mail = Mail()
 
