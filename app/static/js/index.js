@@ -405,23 +405,24 @@ if (openBtn && modal && closeBtn && reviewsList && prevArrow && nextArrow && mai
 
 
 
-// Бесконечная карусель для секции "Наши работы"
 function initInfiniteCarousel() {
   const track = document.querySelector('.works-track');
   const slides = document.querySelectorAll('.works-slide');
-  
+
   if (!track || slides.length === 0) return;
-  
-  // Рассчитываем общую ширину одного набора слайдов
+
+  // Рассчитываем ширину одного набора слайдов
+  let singleSetWidth = 0;
   const gap = parseInt(getComputedStyle(track).gap) || 0;
+
   slides.forEach(slide => {
     singleSetWidth += slide.offsetWidth + gap;
   });
-  
-  // Клонируем слайды столько раз, чтобы заполнить экран + запас
+
+  // Клонируем слайды для бесконечного эффекта
   const viewportWidth = window.innerWidth;
   const neededClones = Math.ceil(viewportWidth / singleSetWidth) + 2;
-  
+
   for (let i = 0; i < neededClones; i++) {
     slides.forEach(slide => {
       const clone = slide.cloneNode(true);
@@ -429,47 +430,47 @@ function initInfiniteCarousel() {
       track.appendChild(clone);
     });
   }
-  
-  let animationId;
+
   let position = 0;
-  const speed = 0.8; // пикселей за кадр
-  
+  const speed = 0.8;
+  let animationId;
+
   function animate() {
     position -= speed;
-    
-    // Сбрасываем позицию когда уехали на ширину оригинальных слайдов
     if (Math.abs(position) >= singleSetWidth) {
       position = 0;
     }
-    
     track.style.transform = `translate3d(${position}px, 0, 0)`;
     animationId = requestAnimationFrame(animate);
   }
-  
-  // Запускаем анимацию
+
   animate();
-  
-  // Пауза при наведении
-  track.addEventListener('mouseenter', () => {
-    cancelAnimationFrame(animationId);
-  });
-  
-  track.addEventListener('mouseleave', () => {
-    animationId = requestAnimationFrame(animate);
-  });
-  
-  // Переинициализация при ресайзе
+
+  track.addEventListener('mouseenter', () => cancelAnimationFrame(animationId));
+  track.addEventListener('mouseleave', () => animationId = requestAnimationFrame(animate));
+
+  // Обновление при ресайзе
   window.addEventListener('resize', () => {
     cancelAnimationFrame(animationId);
-    // Убираем старые клоны кроме оригинальных
+
+    // Удаляем все клоны, оставляем оригинальные слайды
     const originals = Array.from(track.querySelectorAll('.works-slide')).slice(0, slides.length);
     track.innerHTML = '';
     originals.forEach(slide => track.appendChild(slide));
-    // Перезапуск
+
+    // Перезапускаем карусель
     initInfiniteCarousel();
   });
-  
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    initInfiniteCarousel();
+  } catch (err) {
+    console.error('Ошибка слайдера:', err);
+  }
+});
+
 
 document.addEventListener('DOMContentLoaded', initInfiniteCarousel);
 
