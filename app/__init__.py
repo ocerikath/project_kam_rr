@@ -36,15 +36,16 @@ def create_app():
         except Exception as e:
             print(f"❌ Database connection failed: {e}")
             print("⚠️ Continuing without database...")
+        
+    from flask import send_from_directory
+    import os
+
+    @app.route('/robots.txt')
+    def robots():
+        return send_from_directory(os.path.join(app.root_path, ''), 'robots.txt')
+
+    @app.route('/sitemap.xml')
+    def sitemap():
+        return send_from_directory(os.path.join(app.root_path, ''), 'sitemap.xml')
 
     return app
-
-# robots.txt
-@app.route('/robots.txt')
-def robots():
-    return send_from_directory(os.path.join(app.root_path, ''), 'robots.txt')
-
-# sitemap.xml
-@app.route('/sitemap.xml')
-def sitemap():
-    return send_from_directory(os.path.join(app.root_path, ''), 'sitemap.xml')
