@@ -186,6 +186,9 @@
   font-size: clamp(0.95rem, 3vw, 1.1rem);
   color: #3E3E3E;
 }
+.adv-text {
+  display: block !important;
+}
 
 /* планшеты и выше */
 @media (min-width: 600px) {
