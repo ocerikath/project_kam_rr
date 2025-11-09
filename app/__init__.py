@@ -38,17 +38,19 @@ def create_app():
     # -------------------------------
     # Маршруты для SEO и подтверждения
     # -------------------------------
+    # robots.txt
     @app.route('/robots.txt')
     def robots():
-        return send_from_directory(app.root_path, 'robots.txt')
+        return send_from_directory(os.path.join(app.root_path, 'static'), 'robots.txt')
 
+    # sitemap.xml
     @app.route('/sitemap.xml')
     def sitemap():
-        return send_from_directory(app.root_path, 'sitemap.xml')
+        return send_from_directory(os.path.join(app.root_path, 'static'), 'sitemap.xml')
 
-    # Яндекс HTML подтверждение
+    # Яндекс подтверждение
     @app.route('/yandex_6a7ddba0e90f0afc.html')
     def yandex_verification():
-        return send_from_directory(app.root_path, 'yandex_6a7ddba0e90f0afc.html')
+        return send_from_directory(os.path.join(app.root_path, 'static'), 'yandex_6a7ddba0e90f0afc.html')
 
     return app
