@@ -1,10 +1,9 @@
-from flask import Flask
+import os
+from flask import Flask, send_from_directory
 from .models import db
 from flask_mail import Mail
 from config import Config
-import os
 from dotenv import load_dotenv
-from flask import send_from_directory
 
 mail = Mail()
 
@@ -22,8 +21,7 @@ def create_app():
     # Инициализируем расширения
     db.init_app(app)
     mail.init_app(app)
-    
-    
+
     # Импортируем и регистрируем blueprint
     from .routes import main_bp
     app.register_blueprint(main_bp)
@@ -36,16 +34,14 @@ def create_app():
         except Exception as e:
             print(f"❌ Database connection failed: {e}")
             print("⚠️ Continuing without database...")
-        
-    from flask import send_from_directory
-    import os
 
+    # Маршруты для SEO файлов
     @app.route('/robots.txt')
     def robots():
-        return send_from_directory(os.path.join(app.root_path, ''), 'robots.txt')
+        return send_from_directory(app.root_path, 'robots.txt')
 
     @app.route('/sitemap.xml')
     def sitemap():
-        return send_from_directory(os.path.join(app.root_path, ''), 'sitemap.xml')
+        return send_from_directory(app.root_path, 'sitemap.xml')
 
     return app
