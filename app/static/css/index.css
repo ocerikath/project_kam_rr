@@ -26,6 +26,12 @@
   background-attachment: fixed;
   z-index: -1;
 }
+@media (max-width: 991px) {
+  .heading__bg-container {
+    background-attachment: scroll; /* или просто убираем свойство */
+  }
+}
+
 
 .heading__bg-container::after {
   content: "";
