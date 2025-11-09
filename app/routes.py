@@ -52,7 +52,7 @@ def contact():
 
         # ОТПРАВКА НА ПОЧТУ УБРАНА
 
-        return jsonify({"success": True, "message": "Заявка успешно сохранена!"})
+        return jsonify({"success": True, "message": "Заявка успешно отправлена!"})
 
     # Для GET-запроса просто рендерим страницу
     from types import SimpleNamespace
