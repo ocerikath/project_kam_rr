@@ -35,7 +35,9 @@ def create_app():
             print(f"❌ Database connection failed: {e}")
             print("⚠️ Continuing without database...")
 
-    # Маршруты для SEO файлов
+    # -------------------------------
+    # Маршруты для SEO и подтверждения
+    # -------------------------------
     @app.route('/robots.txt')
     def robots():
         return send_from_directory(app.root_path, 'robots.txt')
@@ -43,5 +45,10 @@ def create_app():
     @app.route('/sitemap.xml')
     def sitemap():
         return send_from_directory(app.root_path, 'sitemap.xml')
+
+    # Яндекс HTML подтверждение
+    @app.route('/yandex_6a7ddba0e90f0afc.html')
+    def yandex_verification():
+        return send_from_directory(app.root_path, 'yandex_6a7ddba0e90f0afc.html')
 
     return app
