@@ -37,3 +37,13 @@ def create_app():
             print("⚠️ Continuing without database...")
 
     return app
+
+# robots.txt
+@app.route('/robots.txt')
+def robots():
+    return send_from_directory(os.path.join(app.root_path, ''), 'robots.txt')
+
+# sitemap.xml
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory(os.path.join(app.root_path, ''), 'sitemap.xml')
