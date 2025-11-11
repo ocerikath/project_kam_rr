@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}Песок, Щебень, Заказать Песок{% endblock %}
+{% block title %}Песок, щебень, дорожные и земляные работы — доставка по Москве и области | peskosheben.ru{% endblock %}
 
 {% block extra_css %}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4/dist/css/splide.min.css">
+  <meta name="description" content="Поставка и доставка песка, щебня, грунта и других нерудных материалов по Москве и области. Асфальтирование, дорожные и земляные работы, вывоз снега и мусора. Собственный транспорт, выгодные цены, оперативная доставка.">
+  <meta name="keywords" content="купить песок, купить щебень, доставка песка, доставка щебня, дорожные работы, асфальтирование, земляные работы, вывоз снега, вывоз мусора, нерудные материалы, Москва, Московская область">
 {% endblock %}
 
 {% block content %}
@@ -52,7 +54,7 @@
       <div class="swiper-slide">
         <picture>
           <source srcset="{{ url_for('static', filename='images/site_images/dorozniye_raboti.webp') }}" type="image/webp">
-          <img class="slide-bg" src="{{ url_for('static', filename='images/site_images/dorozniye_raboti.png') }}" alt="Дорожные работы, асфальтирование" loading="lazy">
+          <img class="slide-bg" src="{{ url_for('static', filename='images/site_images/dorozniye_raboti.png') }}" alt="Дорожные работы, Асфальтирование" loading="lazy">
         </picture>
         <div class="slide-overlay1"></div>
         <div class="slide-content">
