@@ -85,6 +85,17 @@ header {
     content: '▾';
     transition: transform 0.3s;
 }
+#navbarMobile .accordion-btn.active::after {
+    transform: translateY(2px) rotate(180deg);
+}
+#navbarMobile .accordion-btn::after {
+    content: '▾';
+    display: inline-block;
+    margin-left: 6px;
+    transform: translateY(2px);
+    transition: transform 0.25s ease;
+    position: relative;
+}
 
 .mobile-menu .accordion-btn.active::after {
     transform: rotate(180deg);
@@ -110,8 +121,25 @@ header {
 
 #navbarMobile .submenu {
     list-style: none;
-    padding-left: 0;
-    margin-left: 0;
+    padding: 0;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.25s ease, opacity 0.25s ease;
+}
+#navbarMobile .submenu.open {
+    max-height: 400px; /* любое большое значение */
+    opacity: 1;
+}
+
+#navbarMobile .submenu a {
+    display: block;
+    padding: 10px 0;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    color: #555;
 }
 #navbarMobile .submenu li {
     list-style-type: none;
@@ -179,6 +207,16 @@ header {
     }
 }
 
+#navbarMobile .accordion-btn {
+    width: 100%;
+    text-align: center;
+    display: block;
+    font-size: 18px;
+    padding: 12px 0;
+    color: #333;
+    text-decoration: none;
+    position: relative; /* нужно для ::after */
+}
 
 #navbarMobile .nav-link,
 #navbarMobile .accordion-btn,

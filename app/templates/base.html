@@ -283,6 +283,15 @@
                 });
             });
         });
+        document.querySelectorAll(".accordion-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                btn.classList.toggle("active");
+
+                const submenu = btn.nextElementSibling;
+                submenu.classList.toggle("open");
+            });
+        });
+
     </script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     {% endblock %}
