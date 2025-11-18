@@ -177,8 +177,6 @@ header {
     height: clamp(40vh, 45vh, 50vh); /* высота открытого меню */
 }
 
-
-
 .header-inner {
     max-width: 1200px; /* или нужная ширина контента */
     margin: 0 auto; /* центрируем */
