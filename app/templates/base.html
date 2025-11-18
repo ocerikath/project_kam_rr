@@ -5,9 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="google-site-verification" content="aHxxndVMo2hviMWUVL4Bq81WIQ3PQ8FsXIVbCGXuslY" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="description" content="Доставка песка, щебня и других материалов в Москве и области. Вывоз снега и мусора, дорожные работы. Звоните!">
-    <meta name="description" content="Доставка песка, щебня, торфа, земли и других материалов. Вывоз снега и мусора, дорожные работы, Вывоз мусора. Звоните!, Пушкино, Щелково, Щёлково.">
-    <title>{% block title %}ПЕСКОЩЕБЕНЬ, Песок и Щебень в Пушкино{% endblock %}</title>
+   
 
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicons/favicon-96x96.png') }}" sizes="96x96">
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicons/favicon.svg') }}">
@@ -44,7 +42,23 @@
             <div class="header-center">
                 <nav class="desktop-nav">
                     <a  href="{{ url_for('main.index') }}">Главная</a>
+
+                     <!-- Выпадающее меню услуг -->
+                    <div class="dropdown-service">
+                        <span class="dropdown-title">Наши услуги</span>
+                        <ul class="dropdown-list">
+                            <li><a href="{{ url_for('main.delivery') }}">Доставка нерудных материалов</a></li>
+                            <li><a href="{{ url_for('main.roads') }}">Дорожные работы</a></li>
+                            <li><a href="{{ url_for('main.trash') }}">Вывоз мусора</a></li>
+                            <li><a href="{{ url_for('main.snow') }}">Вывоз снега</a></li>
+                            <li><a href="{{ url_for('main.tech') }}">Аренда техники</a></li>
+                            <li><a href="{{ url_for('main.earthworks') }}">Земляные работы</a></li>
+                            <li><a href="{{ url_for('main.custom') }}">Индивидуальные заказы</a></li>
+                        </ul>
+                    </div>
+
                     <a  href="{{ url_for('main.catalog') }}">Каталог</a>
+
                     <a  href="{{ url_for('main.contact') }}">Контакты</a>
                 </nav>
             </div>
@@ -96,6 +110,19 @@
             <div id="navbarMobile" class="mobile-menu">
                 <ul class="nav flex-column text-center">
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}">Главная</a></li>
+                     <!-- Аккордеон для мобильного меню -->
+                    <li class="nav-item services-accordion">
+                        <button class="accordion-btn" type="button">Наши услуги</button>
+                        <ul class="submenu">
+                            <li><a href="{{ url_for('main.delivery') }}">Доставка нерудных материалов</a></li>
+                            <li><a href="{{ url_for('main.roads') }}">Дорожные работы</a></li>
+                            <li><a href="{{ url_for('main.trash') }}">Вывоз мусора</a></li>
+                            <li><a href="{{ url_for('main.snow') }}">Вывоз снега</a></li>
+                            <li><a href="{{ url_for('main.tech') }}">Аренда техники</a></li>
+                            <li><a href="{{ url_for('main.earthworks') }}">Земляные работы</a></li>
+                            <li><a href="{{ url_for('main.custom') }}">Индивидуальные заказы</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('main.catalog') }}">Каталог</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('main.contact') }}">Контакты</a></li>
                 </ul>
@@ -257,6 +284,7 @@
             });
         });
     </script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     {% endblock %}
 </body>
 </html>

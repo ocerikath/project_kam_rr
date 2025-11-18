@@ -22,6 +22,39 @@ def index():
 
     return render_template('index.html', categories=categories, products=products, form=form)
 
+@main_bp.route('/uslugi/dostavka')
+def delivery():
+    return render_template('uslugi/dostavka.html')
+
+
+@main_bp.route('/uslugi/dorozhnye-raboty')
+def roads():
+    return render_template('uslugi/dorozhnye-raboty.html')
+
+
+@main_bp.route('/uslugi/vyvoz-musora')
+def trash():
+    return render_template('uslugi/vyvoz-musora.html')
+
+
+@main_bp.route('/uslugi/vyvoz-snega')
+def snow():
+    return render_template('uslugi/vyvoz-snega.html')
+
+
+@main_bp.route('/uslugi/arenda-tehniki')
+def tech():
+    return render_template('uslugi/arenda-tehniki.html')
+
+
+@main_bp.route('/uslugi/zemlyanye-raboty')
+def earthworks():
+    return render_template('uslugi/zemlyanye-raboty.html')
+
+
+@main_bp.route('/uslugi/individualnye-zakazy')
+def custom():
+    return render_template('uslugi/individualnye-zakazy.html')
 
 @main_bp.route('/catalog')
 def catalog():
