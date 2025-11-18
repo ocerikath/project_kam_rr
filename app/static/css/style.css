@@ -178,7 +178,7 @@ header {
 }
 
 .header-inner {
-    max-width: 1200px; /* или нужная ширина контента */
+    max-width: auto; /* или нужная ширина контента */
     margin: 0 auto; /* центрируем */
     padding-left: 0;
     padding-right: 0;
@@ -215,7 +215,7 @@ header {
     width: 100%;
     text-align: center;
     display: block;
-    font-size: 18px;
+    font-size: clamp(1.6vh, 4.5vw, 2.4vh);
     padding: 12px 0;
     color: #333;
     text-decoration: none;
