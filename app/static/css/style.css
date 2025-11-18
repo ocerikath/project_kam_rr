@@ -178,7 +178,11 @@ header {
 }
 
 .header-inner {
-    height: 100%;
+    max-width: 1200px; /* или нужная ширина контента */
+    margin: 0 auto; /* центрируем */
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
 }
 
 #navbarMobile {

@@ -80,17 +80,30 @@
 .mobile-block .phone-number {
     font-size: clamp(1rem, 2vw, 1.2rem);
 }
-
-@media (min-width: 992px) {
-  #navbarMobile .submenu {
+.submenu,
+.dropdown-list {
     list-style: none;
     padding-left: 0;
-    margin-left: 0;
-  }
-  #navbarMobile .submenu li {
-      list-style-type: none;
+    margin: 0;
+}
+
+.submenu li,
+.dropdown-list li {
+    list-style-type: none;
+}
+
+@media (min-width: 992px) {
+  .submenu,
+  .dropdown-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
   }
 
+  .submenu li,
+  .dropdown-list li {
+      list-style-type: none;
+  }
 
   /* Основные ссылки навигации */
   .desktop-nav > a,
