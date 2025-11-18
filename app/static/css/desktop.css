@@ -87,7 +87,7 @@
   .desktop-nav > a,
   .desktop-nav .dropdown-title {
       font-size: clamp(1.4rem, 2vw, 1.6rem);
-      line-height: 1.2; /* одинаково с остальными ссылками */
+      line-height: 1.2; 
       font-weight: 600;
       color: #3E3E3E;
       display: inline-flex;
