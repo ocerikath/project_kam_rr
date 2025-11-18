@@ -108,9 +108,13 @@ header {
     color: #8F735B;
 }
 
-.mobile-menu .submenu {
+#navbarMobile .submenu {
     list-style: none;
     padding-left: 0;
+    margin-left: 0;
+}
+#navbarMobile .submenu li {
+    list-style-type: none;
 }
 
 

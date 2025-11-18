@@ -241,7 +241,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             const burgerBtn = document.getElementById("burgerToggle");
             const menuWrapper = document.getElementById("mobileMenuWrapper");
-            const navItems = menuWrapper.querySelectorAll(".nav-link, .menu-messengers");
+            const navItems = menuWrapper.querySelectorAll(".nav-link, .accordion-btn, .menu-messengers");
 
             burgerBtn.addEventListener("click", (e) => {
                 e.stopPropagation();
