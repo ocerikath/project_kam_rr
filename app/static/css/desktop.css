@@ -37,66 +37,8 @@
     color: var(--text-heading);
     transition: color 0.3s;
 }
-.header-center .desktop-nav > a,
-.header-center .desktop-nav .dropdown-title {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px; /* пространство между текстом и стрелкой */
-    cursor: pointer;
-}
 
-/* Стрелка у выпадающего */
-.dropdown-title::after {
-  content: '▾'; /* маленький треугольник вниз */
-  font-size: 0.7em;
-  transition: transform 0.3s;
-}
 
-/* Поворот стрелки при hover */
-.dropdown-service:hover .dropdown-title::after {
-  transform: rotate(180deg);
-}
-/* Контейнер выпадающего списка */
-.dropdown-service {
-  position: relative;
-}
-
-/* Список услуг */
-.dropdown-list {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: #fff; /* или цвет твоего меню */
-  border-radius: 12px;
-  padding: 8px 0;
-  min-width: 240px;
-  display: none;
-  flex-direction: column;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-  z-index: 20;
-}
-
-/* Показываем при hover */
-.dropdown-service:hover .dropdown-list {
-  display: flex;
-}
-
-/* Ссылки в субменю */
-.dropdown-list li a {
-  display: block;
-  padding: 10px 20px;
-  font-weight: 500;
-  font-size: 1.4rem;
-  color: #3E3E3E;
-  text-decoration: none;
-  transition: background 0.3s, color 0.3s;
-}
-
-.dropdown-list li a:hover {
-  background: #F3F0EA;
-  color: var(--text-heading);
-  border-radius: 8px;
-}
 
 
 .header-center .desktop-nav a:hover {
@@ -137,6 +79,81 @@
 /* Мобильная версия сохраняется */
 .mobile-block .phone-number {
     font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+@media (min-width: 992px) {
+
+  /* Основные ссылки навигации */
+  .desktop-nav > a,
+  .desktop-nav .dropdown-title {
+      text-decoration: none;
+      font-size: 18px; /* как у тебя */
+      font-weight: 600;
+      color: #3E3E3E;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px; /* расстояние между текстом и стрелкой */
+      transition: color 0.3s;
+      cursor: pointer;
+  }
+
+  .desktop-nav > a:hover,
+  .desktop-nav .dropdown-title:hover {
+      color: #8F735B;
+  }
+
+  /* Стрелка у выпадающего */
+  .dropdown-title::after {
+      content: '▾';
+      font-size: 0.7em;
+      transition: transform 0.3s;
+  }
+
+  .dropdown-service:hover .dropdown-title::after {
+      transform: rotate(180deg);
+  }
+
+  /* Контейнер выпадающего списка */
+  .dropdown-service {
+      position: relative;
+  }
+
+  /* Список услуг */
+  .dropdown-list {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #fff; /* цвет под твой фон */
+      border-radius: 12px;
+      padding: 8px 0;
+      min-width: 240px;
+      display: none;
+      flex-direction: column;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      z-index: 20;
+  }
+
+  .dropdown-service:hover .dropdown-list {
+      display: flex;
+  }
+
+  /* Ссылки в субменю */
+  .dropdown-list li a {
+      display: block;
+      padding: 10px 20px;
+      font-weight: 500;
+      font-size: 16px;
+      color: #3E3E3E;
+      text-decoration: none;
+      transition: background 0.3s, color 0.3s;
+  }
+
+  .dropdown-list li a:hover {
+      background-color: #F3F0EA;
+      color: #8F735B;
+      border-radius: 8px;
+  }
+
 }
 
 
