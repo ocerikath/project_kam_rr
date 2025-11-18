@@ -67,11 +67,18 @@ header {
     padding: clamp(1.5vh, 4vw, 2.5vh) 0;
     font-size: clamp(1.6vh, 4.5vw, 2.4vh);
     font-weight: 500;
-    color: #3E3E3E;
+    color: var(--text-main);
+    text-align: center;
+    border-radius: 10px;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
+}
+.mobile-menu .accordion-btn:hover {
+    background-color: #F3F0EA;
+    color: #8F735B;
 }
 
 .mobile-menu .accordion-btn::after {
@@ -101,7 +108,10 @@ header {
     color: #8F735B;
 }
 
-
+.mobile-menu .submenu {
+    list-style: none;
+    padding-left: 0;
+}
 
 
 
@@ -167,12 +177,14 @@ header {
 
 
 #navbarMobile .nav-link,
+#navbarMobile .accordion-btn,
 #navbarMobile .menu-messengers {
     opacity: 0;
     transform: translateY(10px);
     transition: opacity 0.25s ease, transform 0.25s ease;
 }
 #navbarMobile .nav-link.show,
+#navbarMobile .accordion-btn.show,
 #navbarMobile .menu-messengers.show {
     opacity: 1;
 
