@@ -86,15 +86,17 @@
   /* Основные ссылки навигации */
   .desktop-nav > a,
   .desktop-nav .dropdown-title {
-      text-decoration: none;
-      font-size: 18px; /* как у тебя */
+      font-size: 18px; /* одинаково с остальными */
+      line-height: 1.2; /* одинаково с остальными ссылками */
       font-weight: 600;
       color: #3E3E3E;
       display: inline-flex;
       align-items: center;
       gap: 4px; /* расстояние между текстом и стрелкой */
+      text-decoration: none;
       transition: color 0.3s;
       cursor: pointer;
+      height: 100%; /* чтобы совпадало с высотой других ссылок */
   }
 
   .desktop-nav > a:hover,
