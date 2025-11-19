@@ -9,7 +9,7 @@
 .service-card {
     display: flex;
     gap: clamp(2rem, 4vw, 4rem);
-    background: #FFFFFF;
+    background: #dadada;
     border-radius: 20px;
     padding: clamp(2rem, 4vw, 4rem);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
@@ -74,5 +74,39 @@
 
     .service-info h1 {
         text-align: center;
+    }
+}
+
+
+.service-description {
+    padding: clamp(2rem, 5vw, 5rem) 0;
+    display: flex;
+    justify-content: center;
+}
+
+.service-description-inner {
+    max-width: 1100px;
+    padding-left: clamp(1rem, 2vw, 2rem);
+    border-left: 6px solid #A8947C; /* акцентная линия */
+}
+
+.service-description-inner h2 {
+    font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+    margin-bottom: clamp(1rem, 2vw, 1.5rem);
+    color: var(--text-heading);
+}
+
+.service-description-inner p {
+    font-size: clamp(1.4rem, 1.6vw, 1.6rem);
+    line-height: 1.65;
+    color: var(--text-main);
+    margin-bottom: clamp(1rem, 1.5vw, 1.5rem);
+}
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+    .service-description-inner {
+        padding-left: 1rem;
+        border-left-width: 4px;
     }
 }
