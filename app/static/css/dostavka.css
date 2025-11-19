@@ -110,3 +110,152 @@
         border-left-width: 4px;
     }
 }
+
+/* Блок цен */
+.service-pricing {
+    margin-top: clamp(3rem, 5vw, 6rem);
+    padding: clamp(2rem, 4vw, 4rem) 0;
+}
+
+.service-pricing h2 {
+    text-align: center;
+    font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+    color: var(--text-heading);
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+/* Таблица */
+.pricing-table {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #E0DAD0;
+}
+
+.pricing-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    padding: clamp(1rem, 2vw, 1.4rem);
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #EEE8DF;
+    align-items: center;
+}
+
+.pricing-header {
+    background-color: #F5F2EC;
+    font-weight: 700;
+    color: #4A4440;
+}
+
+.pricing-row:last-child {
+    border-bottom: none;
+}
+
+.pricing-row div {
+    font-size: clamp(1.3rem, 1.6vw, 1.6rem);
+    color: #3E3E3E;
+}
+
+/* Кнопка Заказать */
+.price-btn {
+    display: inline-block;
+    padding: clamp(0.4rem, 1vw, 0.7rem) clamp(1rem, 2vw, 1.6rem);
+    background-color: #A8947C;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: clamp(1.2rem, 1.4vw, 1.4rem);
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.price-btn:hover {
+    background-color: #8F735B;
+}
+
+/* Примечание */
+.price-notice {
+    text-align: center;
+    margin-top: clamp(1.5rem, 3vw, 2rem);
+    font-size: clamp(1.2rem, 1.4vw, 1.4rem);
+    color: #7A756D;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Адаптив */
+@media (max-width: 600px) {
+    .pricing-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .pricing-row div:last-child {
+        margin-top: 0.6rem;
+        grid-column: 1 / -1;
+    }
+}
+
+/* Секция 4 "область нашей работы */
+.map-section {
+    padding: clamp(16px, 4vw, 32px);
+    text-align: center;
+    background-color: #EAE6DC;
+  }
+  
+  .map-text h2 {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    margin-bottom: clamp(8px, 2vw, 16px);
+  }
+  
+  .map-text p {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    margin-bottom: clamp(12px, 3vw, 20px);
+    color: #555;
+  }
+  
+  #map {
+    width: 100%;
+    height: clamp(300px, 60vh, 500px);
+    border-radius: clamp(8px, 2vw, 16px);
+    overflow: hidden;
+  }
+  
+/* Секция "Область нашей работы" для десктопа (992px и выше) */
+@media (min-width: 992px) {
+    .map-section {
+      padding: 40px 20px;
+    }
+    
+    .map-text {
+      max-width: 800px;
+      margin: 0 auto 30px;
+    }
+    
+    .map-text h2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+    }
+    
+    .map-text p {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+    }
+    
+    #map {
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 500px;
+      border-radius: 16px;
+    }
+    
+    .map-section p[style*="font-size:14px"] {
+      font-size: 16px !important;
+      margin-top: 16px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
+  }
