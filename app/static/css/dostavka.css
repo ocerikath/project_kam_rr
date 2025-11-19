@@ -1,66 +1,78 @@
-/* ------------------------------
-   ГЛАВНЫЙ БЛОК (картинка + условия)
---------------------------------*/
+/* Внешний отступ секции */
 .service-hero {
+    padding: clamp(2rem, 4vw, 5rem) 0;
     display: flex;
-    flex-direction: column;
-    gap: clamp(20px, 4vw, 40px);
-    padding: clamp(20px, 5vw, 60px) 0;
+    justify-content: center;
 }
 
-.service-hero__image img {
+/* Основной блок */
+.service-card {
+    display: flex;
+    gap: clamp(2rem, 4vw, 4rem);
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: clamp(2rem, 4vw, 4rem);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    border-left: 8px solid #A8947C; /* акцентная линия */
+    max-width: 1200px;
     width: 100%;
+    align-items: center;
+}
+
+/* Картинка */
+.service-image img {
+    width: clamp(250px, 40vw, 420px);
     height: auto;
-    border-radius: 12px;
+    border-radius: 16px;
+    object-fit: cover;
 }
 
-/* Текстовая часть */
-.service-hero__info h1 {
-    font-size: clamp(2rem, 3.5vw, 3rem);
+/* Текст */
+.service-info h1 {
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 700;
     color: var(--text-heading);
-    margin-bottom: clamp(15px, 2vw, 25px);
+    margin-bottom: clamp(1rem, 2vw, 1.5rem);
 }
 
-.service-benefits li {
-    font-size: clamp(1.3rem, 2vw, 1.6rem);
-    margin-bottom: 8px;
-    color: var(--text-default);
+/* Список условий */
+.service-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-
-/* ------------------------------
-   ОПИСАНИЕ УСЛУГИ
---------------------------------*/
-.service-description {
-    margin-top: clamp(30px, 6vw, 70px);
+.service-list li {
+    font-size: clamp(1.4rem, 1.8vw, 1.6rem);
+    color: var(--text-main);
+    margin-bottom: 0.8rem;
+    padding-left: 1.6rem;
+    position: relative;
 }
 
-.service-description h2 {
-    font-size: clamp(1.8rem, 3vw, 2.4rem);
-    margin-bottom: clamp(15px, 2vw, 25px);
-    color: var(--text-heading);
+.service-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #8F735B; /* твой акцент */
+    font-size: 1.6rem;
 }
 
-.service-description p {
-    font-size: clamp(1.3rem, 2vw, 1.6rem);
-    line-height: 1.55;
-    margin-bottom: clamp(15px, 2vw, 25px);
-}
+/* -------- Адаптив для мобильных -------- */
 
-
-/* ------------------------------
-   ДЕСКТОП
---------------------------------*/
-@media (min-width: 992px) {
-
-    .service-hero {
-        flex-direction: row;
-        align-items: center;
-        gap: clamp(40px, 4vw, 80px);
+@media (max-width: 768px) {
+    .service-card {
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.5rem;
     }
 
-    .service-hero__image,
-    .service-hero__info {
-        flex: 1;
+    .service-image img {
+        width: 100%;
+        border-radius: 14px;
+    }
+
+    .service-info h1 {
+        text-align: center;
     }
 }

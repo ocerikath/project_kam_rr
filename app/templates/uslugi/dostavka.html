@@ -14,22 +14,26 @@
 {% block content %}
 
 <section class="service-hero">
-    <div class="service-hero__image">
-        <img src="{{ url_for('static', filename='images/site_images/primer2.png') }}" alt="Доставка нерудных материалов">
-    </div>
+    <div class="service-card">
+        <div class="service-image">
+            <img src="{{ url_for('static', filename='images/site_images/primer2.png') }}" alt="Доставка нерудных материалов">
+        </div>
 
-    <div class="service-hero__info">
-        <h1>Доставка нерудных материалов</h1>
-        <ul class="service-benefits">
-            <li>Доставка от 1 м³</li>
-            <li>Работаем без выходных</li>
-            <li>Собственный автопарк</li>
-            <li>Оперативная подача техники</li>
-            <li>Честные цены без скрытых доплат</li>
-            <li>Удобная выгрузка на объекте</li>
-        </ul>
+        <div class="service-info">
+            <h1>Доставка нерудных материалов</h1>
+
+            <ul class="service-list">
+                <li>Поставка песка, щебня, ПГС, гравия и других материалов</li>
+                <li>Свой парк самосвалов 10–30 тонн</li>
+                <li>Доставка в день заказа (при наличии свободных машин)</li>
+                <li>Честный расчёт стоимости: фиксируем цену перед выездом</li>
+                <li>Работаем по Москве и Московской области</li>
+                <li>Возможность безналичного расчёта</li>
+            </ul>
+        </div>
     </div>
 </section>
+
 
 
 <section class="service-description">
