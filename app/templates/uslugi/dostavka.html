@@ -1,14 +1,49 @@
-{% extends "base.html" %}
-{% block title %}Доставка нерудных материалов — песок, щебень, ПГС, грунт | Москва и область{% endblock %}
+{% extends 'base.html' %}
+{% block title %}Доставка нерудных материалов по Москве и МО — песок, щебень, грунт{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dostavka.css') }}">
+<meta name="description" content="ПЕСКОЩЕБЕНЬ — профессиональная доставка песка, щебня и других нерудных материалов по Москве и области. Собственный транспорт, быстрое выполнение заказов, честные цены.">
+<meta name="keywords" content="доставка нерудных материалов, доставка песка, доставка щебня, ПЕСКОЩЕБЕНЬ, доставка грунта, купить песок, купить щебень">
+<meta property="og:title" content="Доставка нерудных материалов — ПЕСКОЩЕБЕНЬ">
+<meta property="og:description" content="Доставка песка, щебня и других нерудных материалов по Москве и области. Быстро, надежно и по честным ценам.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="{{ url_for('static', filename='images/site_images/primer7.png', _external=True) }}">
+{% endblock %}
+
 {% block content %}
 
-<section class="service-page container">
-    <h1>Доставка нерудных материалов</h1>
-    <p class="lead">
-        Скоро будет Обновление данной страницы!
-    </p>
+<section class="service-hero">
+    <div class="service-hero__image">
+        <img src="{{ url_for('static', filename='images/site_images/primer2.png') }}" alt="Доставка нерудных материалов">
+    </div>
 
-    <a href="#feedback" class="btn"></a>
+    <div class="service-hero__info">
+        <h1>Доставка нерудных материалов</h1>
+        <ul class="service-benefits">
+            <li>Доставка от 1 м³</li>
+            <li>Работаем без выходных</li>
+            <li>Собственный автопарк</li>
+            <li>Оперативная подача техники</li>
+            <li>Честные цены без скрытых доплат</li>
+            <li>Удобная выгрузка на объекте</li>
+        </ul>
+    </div>
+</section>
+
+
+<section class="service-description">
+    <h2>Поставка песка, щебня, грунта и других материалов</h2>
+    <p>
+        ПЕСКОЩЕБЕНЬ предоставляет профессиональную доставку нерудных материалов
+        по Москве и Московской области. Мы работаем с частными клиентами, строительными компаниями
+        и организациями, которым требуется оперативная поставка качественных материалов на объект.
+    </p>
+    <p>
+        В наличии: песок всех типов (мытый, речной, сеяный, карьерный), щебень фракций 5–20, 20–40,
+        вторичный щебень, ПГС, гравий, грунт, суглинок и чернозём. Мы обеспечиваем точные сроки,
+        безопасную выгрузку и выгодные цены на доставку.
+    </p>
 </section>
 
 {% endblock %}

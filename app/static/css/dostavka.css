@@ -1,0 +1,66 @@
+/* ------------------------------
+   ГЛАВНЫЙ БЛОК (картинка + условия)
+--------------------------------*/
+.service-hero {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 4vw, 40px);
+    padding: clamp(20px, 5vw, 60px) 0;
+}
+
+.service-hero__image img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+/* Текстовая часть */
+.service-hero__info h1 {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    color: var(--text-heading);
+    margin-bottom: clamp(15px, 2vw, 25px);
+}
+
+.service-benefits li {
+    font-size: clamp(1.3rem, 2vw, 1.6rem);
+    margin-bottom: 8px;
+    color: var(--text-default);
+}
+
+
+/* ------------------------------
+   ОПИСАНИЕ УСЛУГИ
+--------------------------------*/
+.service-description {
+    margin-top: clamp(30px, 6vw, 70px);
+}
+
+.service-description h2 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    margin-bottom: clamp(15px, 2vw, 25px);
+    color: var(--text-heading);
+}
+
+.service-description p {
+    font-size: clamp(1.3rem, 2vw, 1.6rem);
+    line-height: 1.55;
+    margin-bottom: clamp(15px, 2vw, 25px);
+}
+
+
+/* ------------------------------
+   ДЕСКТОП
+--------------------------------*/
+@media (min-width: 992px) {
+
+    .service-hero {
+        flex-direction: row;
+        align-items: center;
+        gap: clamp(40px, 4vw, 80px);
+    }
+
+    .service-hero__image,
+    .service-hero__info {
+        flex: 1;
+    }
+}
