@@ -16,4 +16,39 @@
         <priority>0.8</priority>
     </url>
 
+    <url>
+        <loc>https://www.peskosheben.ru/uslugi/dostavka</loc>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.peskosheben.ru/uslugi/dorozhnye-raboty</loc>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.peskosheben.ru/uslugi/vyvoz-musora</loc>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.peskosheben.ru/uslugi/vyvoz-snega</loc>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.peskosheben.ru/uslugi/arenda-tehniki</loc>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.peskosheben.ru/uslugi/zemlyanye-raboty</loc>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.peskosheben.ru/uslugi/individualnye-zakazy</loc>
+        <priority>0.8</priority>
+    </url>
+
 </urlset>
