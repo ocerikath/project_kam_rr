@@ -1,4 +1,5 @@
 .site-header {
+    position: relative;
     background-color: var(--bg-main);
     border-bottom: 1px solid var(--text-muted);
     width: 100%;
@@ -76,9 +77,16 @@
     color: var(--btn-bg);
 }
 
+.header-inner, 
+.header-center, 
+.desktop-nav,
+.dropdown-service {
+    position: static !important; /* Меню будет искать ближайший relative выше, то есть .site-header */
+}
+
 /* Мобильная версия сохраняется */
 .mobile-block .phone-number {
-    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-size: clamp(0.8rem, 2vw, 1.2rem);
 }
 .submenu,
 .dropdown-list {
@@ -91,6 +99,102 @@
 .dropdown-list li {
     list-style-type: none;
 }
+
+/* Основной контейнер в навигации */
+.dropdown-service {
+  position: static; /* Важно: убираем relative, чтобы меню позиционировалось относительно всей шапки */
+}
+
+.dropdown-title {
+  cursor: pointer;
+  font-size: clamp(1.4rem, 2vw, 1.6rem);
+  font-weight: 600;
+  color: var(--text-heading);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 10px; /* Увеличиваем зону наведения */
+}
+
+/* Контейнер на всю ширину */
+.dropdown-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%; /* Встает ровно под границу .site-header */
+  width: 100%;
+  background-color: #EAE6DC; /* Твой цвет фона */
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 2px solid var(--text-muted);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  
+  /* Анимация появления */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease-in-out;
+  z-index: 999;
+}
+
+/* Показываем при наведении на родительский элемент */
+.dropdown-service:hover .dropdown-content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Ограничитель ширины контента внутри широкого меню */
+.dropdown-inner-container {
+  max-width: 1200px; /* Или твоя стандартная ширина контента */
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Сетка ссылок */
+.dropdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 колонки для равномерного распределения */
+  gap: 0; /* Убираем стандартный гэп, чтобы линии смыкались */
+}
+
+/* Элемент ссылки */
+.dropdown-item {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  text-decoration: none;
+  border-right: 1px solid rgba(0, 0, 0, 0.08); /* Те самые аккуратные линии */
+  transition: background 0.3s ease;
+}
+
+/* Убираем линию у последнего элемента в ряду */
+.dropdown-item:nth-child(4n) {
+  border-right: none;
+}
+
+/* Если элементов больше 4, добавим линию снизу для первых */
+.dropdown-item:nth-child(n+5) {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.dropdown-item:hover {
+  background-color: rgba(0, 0, 0, 0.03); /* Легкое затемнение при наведении */
+}
+
+.item-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #4A4440;
+  margin-bottom: 5px;
+}
+
+.item-desc {
+  font-size: 0.85rem;
+  color: #6c757d;
+  line-height: 1.3;
+}
+
+
 
 @media (min-width: 992px) {
   .submenu,
@@ -106,20 +210,7 @@
   }
 
   /* Основные ссылки навигации */
-  .desktop-nav > a,
-  .desktop-nav .dropdown-title {
-      font-size: clamp(1.4rem, 2vw, 1.6rem);
-      line-height: 1.2; 
-      font-weight: 600;
-      color: #3E3E3E;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px; /* расстояние между текстом и стрелкой */
-      text-decoration: none;
-      transition: color 0.3s;
-      cursor: pointer;
-      height: 100%; /* чтобы совпадало с высотой других ссылок */
-  }
+ 
 
   .desktop-nav > a:hover,
   .desktop-nav .dropdown-title:hover {
@@ -376,3 +467,85 @@
       line-height: 1.5;
     }
   }
+
+
+ /* 1. Диапазон: Совсем узкие десктопы (992px - 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .header-inner {
+      padding: 10px 10px;
+  }
+
+  /* Максимальное сжатие */
+  .header-left .menu__logo-img {
+      height: 45px; 
+  }
+  .header-left .logo__name {
+      font-size: 1.3rem;
+      margin-left: 5px;
+  }
+
+  /* Ссылки почти вплотную */
+  .header-center .desktop-nav {
+      gap: 25px; 
+  }
+  .header-center .desktop-nav a,
+  .dropdown-title {
+      font-size: 1rem;
+  }
+
+  /* Правый блок: убираем только то, что просил */
+  .header-right {
+      margin-right: 0;
+      gap: 3px;
+  }
+  .header-right .menu-messengers {
+      gap: 10px;
+  }
+  .header-right .menu-messengers img {
+      width: 20px;
+      height: 20px;
+  }
+  .header-right .phone-number {
+      font-size: 0.9rem;
+  }
+
+  .worktime-block {
+      margin-right: 10px !important;
+  }
+}
+
+/* 2. Диапазон: Небольшие ноутбуки (1200px - 1400px) */
+@media (min-width: 1200px) and (max-width: 1400px) {
+  .header-inner {
+      padding: 10px 20px;
+  }
+
+  /* Умеренные размеры */
+  .header-left .menu__logo-img {
+      height: 55px;
+  }
+  .header-left .logo__name {
+      font-size: 1.7rem;
+  }
+
+  /* Чуть больше воздуха в меню */
+  .header-center .desktop-nav {
+      gap: 35px; 
+  }
+  .header-center .desktop-nav a,
+  .dropdown-title {
+      font-size: 1.2rem;
+  }
+
+  /* Правый блок */
+  .header-right {
+      margin-right: 10px;
+      gap: 5px;
+  }
+  .header-right .menu-messengers {
+      gap: 20px;
+  }
+  .header-right .phone-number {
+      font-size: 1rem; /* Телефон держим поменьше, как ты и хотел */
+  }
+}

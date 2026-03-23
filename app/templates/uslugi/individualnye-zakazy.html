@@ -1,14 +1,85 @@
-{% extends "base.html" %}
-{% block title %}Индивидуальные заказы — подбор услуг под задачу{% endblock %}
+{% extends 'base.html' %}
+{% block title %}Индивидуальные решения — ПЕСКОЩЕБЕНЬ{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/individual.css') }}">
+<meta name="description" content="Комплексные и нестандартные заказы в Москве и МО. Спецтехника, снабжение и дорожные работы под ключ для вашего проекта.">
+{% endblock %}
+
 {% block content %}
 
-<section class="service-page container">
-    <h1>Индивидуальные заказы</h1>
-    <p class="lead">
-        Скоро будет Обновление данной страницы!
+<section class="custom-order-hero">
+    <h1>Любая задача <br> <span style="color: #A8947C;">имеет решение</span></h1>
+    <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto; color: #666;">
+        Если ваш запрос выходит за рамки стандартного прайс-листа — мы подготовим персональное предложение под ключ.
     </p>
-
-    <a href="#feedback" class="btn"></a>
 </section>
 
+<div class="solutions-grid">
+    <div class="solution-card">
+        <h3>Комплексное снабжение</h3>
+        <p>Полное обеспечение строительного объекта нерудными материалами по графику. Вам не нужно искать 5 разных поставщиков.</p>
+    </div>
+    <div class="solution-card">
+        <h3>Сложный ландшафт</h3>
+        <p>Подготовка участков со сложным рельефом: выемка грунта, укрепление склонов, засыпка низин и выравнивание.</p>
+    </div>
+    <div class="solution-card">
+        <h3>Промышленные масштабы</h3>
+        <p>Работаем с крупными тендерами и госконтрактами. Предоставляем полный пакет закрывающих документов и отчетности.</p>
+    </div>
+</div>
+
+<section class="step-section">
+    <h2 style="text-align: center;">Как мы работаем с Вами</h2>
+    <div class="steps-flex">
+        <div class="step-item">
+            <div class="step-number">01</div>
+            <h4>Анализ задачи</h4>
+            <p>Изучаем специфику вашего объекта и требования.</p>
+        </div>
+        <div class="step-item">
+            <div class="step-number">02</div>
+            <h4>Выезд инженера</h4>
+            <p>Бесплатно замеряем и оцениваем объемы на месте.</p>
+        </div>
+        <div class="step-item">
+            <div class="step-number">03</div>
+            <h4>Расчет сметы</h4>
+            <p>Фиксируем стоимость, которая не изменится в процессе.</p>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section" style="text-align: center; padding: 80px 20px; background: #fff; border-radius: 30px; margin-bottom: 40px;">
+    <h2 style="font-size: 2.5rem; margin-bottom: 15px;">Нужен расчет нестандартной задачи?</h2>
+    <p style="color: #666; font-size: 1.1rem;">Оставьте заявку или позвоните нам напрямую. Мы на связи ежедневно.</p>
+    
+    <div class="cta-button-container">
+        <a href="{{ url_for('main.index') }}#feedback" class="price-btn-large">Обсудить проект</a>
+        
+        <span style="color: #ccc; font-weight: 300;">или</span>
+
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <a href="tel:+79265685900" class="phone-link-large">
+                <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                +7 (926) 568-59-00
+            </a>
+            <span class="phone-subtext">Бесплатная консультация инженера</span>
+        </div>
+    </div>
+</section>
+
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Service",
+      "name": "Индивидуальные строительные решения",
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "description": "Персональный расчет сметы и выезд инженера бесплатно"
+      }
+    }
+    </script>
 {% endblock %}

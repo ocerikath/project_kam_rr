@@ -30,10 +30,10 @@ def create_app():
     with app.app_context():
         try:
             db.create_all()
-            print("✅ Database tables created successfully")
+            print("Database tables created successfully")
         except Exception as e:
-            print(f"❌ Database connection failed: {e}")
-            print("⚠️ Continuing without database...")
+            print(f"Database connection failed: {e}")
+            print("Continuing without database...")
 
     # -------------------------------
     # Маршруты для SEO и подтверждения

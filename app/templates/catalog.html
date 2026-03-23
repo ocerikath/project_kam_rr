@@ -132,4 +132,36 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Каталог нерудных материалов",
+    "description": "Широкий ассортимент песка, щебня, крошки и грунта с доставкой.",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Песок (строительный, карьерный, мытый)"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Щебень (гранитный, гравийный, известняковый)"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Асфальтовая крошка"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Грунт и чернозем"
+      }
+    ]
+  }
+  </script>
+  
 {% endblock %}

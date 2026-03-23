@@ -209,5 +209,26 @@
       map.setBounds(polygon.geometry.getBounds(), { checkZoomRange: true, zoomMargin: 20 });
   }
   </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Доставка нерудных материалов",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "ПЕСКОЩЕБЕНЬ"
+      },
+      "areaServed": {
+        "@type": "State",
+        "name": "Москва и Московская область"
+      },
+      "description": "Оперативная доставка песка, щебня, грунта и других материалов собственным автотранспортом.",
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "RUB",
+        "price": "500"
+      }
+    }
+    </script>
 
 {% endblock %}

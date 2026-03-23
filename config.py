@@ -13,7 +13,7 @@ class Config:
 
             database_url = database_url.replace("postgresql://", "postgresql+psycopg://", 1)
     
-    SQLALCHEMY_DATABASE_URI = database_url or "postgresql+psycopg://postgres:urdatabase@localhost:port/name"
+    SQLALCHEMY_DATABASE_URI = database_url or "postgresql+psycopg2://postgres:Hovo2005@localhost:5432/project_kam"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # MAIL

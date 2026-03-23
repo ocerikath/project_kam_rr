@@ -776,3 +776,130 @@ main {
         transition: none;
     }
 }
+
+
+/* Контейнер для слоев */
+.mobile-menu {
+    position: relative;
+    overflow: hidden; /* Чтобы слои не вылезали за границы */
+    min-height: 400px; 
+}
+
+/* Базовый стиль слоя */
+.mobile-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100%); /* По умолчанию все слои справа */
+}
+
+/* Активный слой (тот, что видим) */
+.mobile-layer.active {
+    position: relative; /* Чтобы высота меню подстраивалась под контент */
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(0);
+}
+
+/* Если слой был активным, но мы ушли вперед (он уезжает влево) */
+.mobile-layer.prev {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+/* Стили кнопок переключения */
+.layer-next-btn {
+    /* Сброс стандартных стилей кнопки */
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;            /* Включаем флекс для выравнивания */
+    justify-content: center;   /* Центрируем основной текст */
+    align-items: center;       /* Выравниваем иконку по вертикали */
+    
+    /* Твои размеры */
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: clamp(1.6vh, 4.5vw, 2.4vh);
+    padding: clamp(1.5vh, 4vw, 2.5vh) 0;
+    
+    /* Отступ сверху, чтобы кнопка была чуть ниже */
+    margin-top: 15px; 
+    
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+
+.layer-next-btn:active {
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: scale(0.98);
+}
+
+.layer-next-btn::after {
+    content: '›'; 
+    margin-left: 12px;        /* Фиксированный отступ от текста */
+
+    font-weight: 1000;         /* Максимальная жирность */
+    line-height: 1;           /* Чтобы не распирало строку */
+    color: var(--text-main);
+    opacity: 0.8;             /* Чуть-чуть приглушим, чтобы не кричало */
+}
+
+.layer-back-btn {
+    width: 100%;
+    background: rgba(0,0,0,0.03);
+    border: none;
+    border-radius: 10px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 12px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.layer-title {
+    color: var(--text-main);
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Ссылки второго уровня */
+.nav-link.secondary {
+    font-size: 1.1rem !important;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+#layerServices {
+    max-height: 100vh; /* Можно чуть увеличить, если экран позволяет */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 80px; /* ОГРОМНЫЙ отступ снизу, чтобы последняя ссылка "взлетела" выше */
+}
+
+#layerServices ul {
+    padding: 0 30px;
+    margin-bottom: 0;
+}
+
+/* Красивый тонкий скроллбар (опционально) */
+#layerServices::-webkit-scrollbar {
+    width: 4px;
+}
+#layerServices::-webkit-scrollbar-thumb {
+    background: var(--text-muted);
+    border-radius: 10px;
+}
+
+

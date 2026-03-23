@@ -45,17 +45,43 @@
                     <a  href="{{ url_for('main.index') }}">Главная</a>
 
                      <!-- Выпадающее меню услуг -->
-                    <div class="dropdown-service">
-                        <span class="dropdown-title">Наши услуги</span>
-                        <ul class="dropdown-list">
-                            <li><a href="{{ url_for('main.delivery') }}">Доставка нерудных материалов</a></li>
-                            <li><a href="{{ url_for('main.roads') }}">Дорожные работы</a></li>
-                            <li><a href="{{ url_for('main.trash') }}">Вывоз мусора</a></li>
-                            <li><a href="{{ url_for('main.snow') }}">Вывоз снега</a></li>
-                            <li><a href="{{ url_for('main.tech') }}">Аренда техники</a></li>
-                            <li><a href="{{ url_for('main.earthworks') }}">Земляные работы</a></li>
-                            <li><a href="{{ url_for('main.custom') }}">Индивидуальные заказы</a></li>
-                        </ul>
+                     <div class="dropdown-service">
+                        <span class="dropdown-title">Наши услуги <i class="chevron"></i></span>
+                        <div class="dropdown-content">
+                            <div class="dropdown-inner-container">
+                                <div class="dropdown-grid">
+                                    <a href="{{ url_for('main.delivery') }}" class="dropdown-item">
+                                        <span class="item-title">Доставка материалов</span>
+                                        <span class="item-desc">Песок, щебень, грунт по Москве и области</span>
+                                    </a>
+                                    <a href="{{ url_for('main.roads') }}" class="dropdown-item">
+                                        <span class="item-title">Дорожные работы</span>
+                                        <span class="item-desc">Строительство дорог и укладка асфальта</span>
+                                    </a>
+                                    <a href="{{ url_for('main.trash') }}" class="dropdown-item">
+                                        <span class="item-title">Вывоз мусора</span>
+                                        <span class="item-desc">Контейнеры разного объема (8-27 м³)</span>
+                                    </a>
+                                    <a href="{{ url_for('main.custom') }}" class="dropdown-item">
+                                        <span class="item-title">Индивидуальные заказы</span>
+                                        <span class="item-desc">Специфические задачи под ключ</span>
+                                    </a>
+                                    
+                                    <a href="{{ url_for('main.tech') }}" class="dropdown-item">
+                                        <span class="item-title">Аренда техники</span>
+                                        <span class="item-desc">Самосвалы, экскаваторы, погрузчики</span>
+                                    </a>
+                                    <a href="{{ url_for('main.earthworks') }}" class="dropdown-item">
+                                        <span class="item-title">Земляные работы</span>
+                                        <span class="item-desc">Рытье котлованов и планировка грунта</span>
+                                    </a>
+                                    <a href="{{ url_for('main.snow') }}" class="dropdown-item">
+                                        <span class="item-title">Вывоз снега</span>
+                                        <span class="item-desc">Уборка территорий и утилизация</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <a  href="{{ url_for('main.catalog') }}">Каталог</a>
@@ -109,31 +135,45 @@
         <!-- Мобильное меню -->
         <div class="mobile-menu-wrapper d-lg-none" id="mobileMenuWrapper">
             <div id="navbarMobile" class="mobile-menu">
-                <ul class="nav flex-column text-center">
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}">Главная</a></li>
-                     <!-- Аккордеон для мобильного меню -->
-                    <li class="nav-item services-accordion">
-                        <button class="accordion-btn" type="button">Наши услуги</button>
-                        <ul class="submenu">
-                            <li><a href="{{ url_for('main.delivery') }}">Доставка нерудных материалов</a></li>
-                            <li><a href="{{ url_for('main.roads') }}">Дорожные работы</a></li>
-                            <li><a href="{{ url_for('main.trash') }}">Вывоз мусора</a></li>
-                            <li><a href="{{ url_for('main.snow') }}">Вывоз снега</a></li>
-                            <li><a href="{{ url_for('main.tech') }}">Аренда техники</a></li>
-                            <li><a href="{{ url_for('main.earthworks') }}">Земляные работы</a></li>
-                            <li><a href="{{ url_for('main.custom') }}">Индивидуальные заказы</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.catalog') }}">Каталог</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('main.contact') }}">Контакты</a></li>
-                </ul>
-                <div class="menu-messengers d-flex justify-content-center gap-5">
-                    <a href="https://t.me/peskosheben" target="_blank">
-                        <img src="{{ url_for('static', filename='images/icons/telegram.png') }}" alt="Telegram" class="messenger-icon">
-                    </a>
-                    <a href="https://wa.me/79265685900" target="_blank">
-                        <img src="{{ url_for('static', filename='images/icons/whatsapp.png') }}" alt="WhatsApp" class="messenger-icon">
-                    </a>
+                <div class="mobile-layer active" id="layerMain">
+                    <ul class="nav flex-column text-center">
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}">Главная</a></li>
+                        
+                        <li class="nav-item">
+                            <button class="layer-next-btn" type="button" onclick="openLayer('layerServices')">
+                                Наши услуги
+                            </button>
+                        </li>
+            
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.catalog') }}">Каталог</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('main.contact') }}">Контакты</a></li>
+                    </ul>
+                    
+                    <div class="menu-messengers d-flex justify-content-center gap-5 mt-4">
+                        <a href="https://t.me/peskosheben" target="_blank">
+                            <img src="{{ url_for('static', filename='images/icons/telegram.png') }}" alt="Telegram" class="messenger-icon">
+                        </a>
+                        <a href="https://wa.me/79265685900" target="_blank">
+                            <img src="{{ url_for('static', filename='images/icons/whatsapp.png') }}" alt="WhatsApp" class="messenger-icon">
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="mobile-layer" id="layerServices">
+                    <button class="layer-back-btn" onclick="openLayer('layerMain')">
+                        ← Назад в меню
+                    </button>
+                    <h3 class="layer-title">Наши услуги</h3>
+                    <ul class="nav flex-column text-center">
+                        <li><a class="nav-link secondary" href="{{ url_for('main.delivery') }}">Доставка нерудных материалов</a></li>
+                        <li><a class="nav-link secondary" href="{{ url_for('main.roads') }}">Дорожные работы</a></li>
+                        <li><a class="nav-link secondary" href="{{ url_for('main.trash') }}">Вывоз мусора</a></li>
+                        <li><a class="nav-link secondary" href="{{ url_for('main.snow') }}">Вывоз снега</a></li>
+                        <li><a class="nav-link secondary" href="{{ url_for('main.tech') }}">Аренда техники</a></li>
+                        <li><a class="nav-link secondary" href="{{ url_for('main.earthworks') }}">Земляные работы</a></li>
+                        <li><a class="nav-link secondary" href="{{ url_for('main.custom') }}">Индивидуальные заказы</a></li>
+                        <li><a class="nav-link secondary" href="{{ url_for('main.custom') }}"></a></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -292,8 +332,26 @@
                 submenu.classList.toggle("open");
             });
         });
+    
+        function openLayer(layerId) {
+            const layers = document.querySelectorAll('.mobile-layer');
+            const currentActive = document.querySelector('.mobile-layer.active');
+            const nextActive = document.getElementById(layerId);
 
+            if (layerId === 'layerMain') {
+                // Возвращаемся назад
+                currentActive.classList.remove('active');
+                nextActive.classList.remove('prev');
+                nextActive.classList.add('active');
+            } else {
+                // Идем вперед
+                currentActive.classList.add('prev');
+                currentActive.classList.remove('active');
+                nextActive.classList.add('active');
+            }
+        }
     </script>
+    
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
     {% endblock %}
 </body>

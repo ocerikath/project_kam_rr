@@ -259,3 +259,83 @@
       line-height: 1.5;
     }
   }
+
+/* -------- Ультра-адаптив (Mobile First / Small Screens) -------- */
+
+@media (max-width: 420px) {
+    /* 1. Главная карточка услуги */
+    .service-hero {
+        padding: 1rem 0; /* Убираем лишние пустоты сверху/снизу */
+    }
+
+    .service-card {
+        padding: 1.2rem; /* Зажимаем внутренние отступы */
+        border-left-width: 4px; /* Делаем акцентную линию тоньше, чтобы не съедала место */
+    }
+
+    .service-info h1 {
+        font-size: 1.6rem; /* Уменьшаем заголовок, чтобы не переносился по одному слову */
+        line-height: 1.2;
+    }
+
+    .service-list li {
+        font-size: 1.1rem; /* Оптимальный размер для чтения */
+        padding-left: 1.2rem;
+        line-height: 1.4;
+    }
+
+    /* 2. Таблица цен — самая проблемная зона */
+    .pricing-table {
+        border-radius: 8px; /* Чуть проще углы */
+    }
+
+    .pricing-row {
+        /* Переводим в формат "одна строка — одна ячейка" для узких экранов */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+        gap: 0.5rem;
+    }
+
+    .pricing-header {
+        display: none; /* Скрываем шапку на совсем узких экранах, она только путает */
+    }
+
+    .pricing-row div:first-child {
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: #4A4440;
+    }
+
+    .pricing-row div:nth-child(2) {
+        font-size: 1.1rem;
+        color: #A8947C; /* Выделяем цену цветом */
+        font-weight: 600;
+    }
+
+    .price-btn {
+        width: 100%; /* Кнопка "Заказать" на всю ширину под ценой */
+        text-align: center;
+        padding: 0.8rem;
+        font-size: 1.1rem;
+    }
+
+    /* 3. Описание услуги */
+    .service-description-inner {
+        padding-left: 0.8rem;
+    }
+
+    .service-description-inner h2 {
+        font-size: 1.5rem;
+    }
+
+    /* 4. Карта */
+    #map {
+        height: 250px; /* Уменьшаем высоту, чтобы карта не занимала 3 экрана прокрутки */
+    }
+    
+    .map-text h2 {
+        font-size: 1.4rem;
+    }
+}
