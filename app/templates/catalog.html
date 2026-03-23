@@ -47,7 +47,9 @@
                     <p class="product-card__price">от {{ product.price }} ₽</p>
                   </div>
 
-                  <a href="{{ url_for('main.index') }}#feedback" class="product-card__btn">Заказать</a>
+                  <a href="{{ url_for('main.index', product=product.name) }}#feedback" class="product-card__btn">
+                    Заказать
+                </a>
                 </div>
               {% endif %}
             {% endfor %}
@@ -68,6 +70,30 @@
   {% else %}
     <p class="empty-text">Категории пока не добавлены</p>
   {% endif %}
+
+</section>
+
+<section class="catalog-help">
+  <div class="catalog-help__content">
+      <div class="catalog-help__icon">🔍</div>
+      <h2 class="catalog-help__title">Не нашли то, что искали?</h2>
+      <p class="catalog-help__text">
+          Наш ассортимент постоянно пополняется. Свяжитесь с менеджером — мы найдем нужный материал, 
+          рассчитаем объем и организуем доставку в кратчайшие сроки!
+      </p>
+      
+      <div class="catalog-help__actions">
+          <a href="tel:+79265685900" class="help-phone">
+              <span class="phone-icon">📞</span> +7 (926) 568-59-00
+          </a>
+          
+          <a href="{{ url_for('main.index') }}#feedback" class="help-form-btn">
+              Оставить заявку на поиск
+          </a>
+      </div>
+      
+      <p class="catalog-help__subtext">Работаем ежедневно с 07:00 до 21:00</p>
+  </div>
 </section>
 
 <script>
@@ -163,5 +189,5 @@ document.addEventListener('DOMContentLoaded', function() {
     ]
   }
   </script>
-  
+
 {% endblock %}

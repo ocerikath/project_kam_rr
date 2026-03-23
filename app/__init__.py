@@ -4,8 +4,29 @@ from .models import db
 from flask_mail import Mail
 from config import Config
 from dotenv import load_dotenv
+import requests
 
 mail = Mail()
+load_dotenv()
+
+def send_telegram(message):
+    token = os.getenv("TELEGRAM_BOT_TOKEN")
+    chat_id = os.getenv("TELEGRAM_CHAT_ID")
+    
+    if not token or not chat_id:
+        print(f"❌ Ошибка: Токен ({token}) или Chat ID ({chat_id}) не найдены!")
+        return
+
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+    data = {"chat_id": chat_id, "text": message, "parse_mode": "HTML"}
+    
+    try:
+        response = requests.post(url, data=data)
+        # Это самое важное — смотрим, что ответил Телеграм
+        print(f"📡 TG Status: {response.status_code} | Response: {response.text}")
+        response.raise_for_status()
+    except Exception as e:
+        print(f"❌ Ошибка запроса к Telegram: {e}")
 
 def create_app():
     # Загружаем .env только для локальной разработки
@@ -54,3 +75,4 @@ def create_app():
         return send_from_directory(os.path.join(app.root_path, 'static'), 'yandex_6a7ddba0e90f0afc.html')
 
     return app
+

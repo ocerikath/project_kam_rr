@@ -105,38 +105,55 @@ document.addEventListener("DOMContentLoaded", () => {
     // Отправка формы через AJAX
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-
-        // Сброс ошибок
-        form.querySelectorAll(".field-error").forEach(el => el.innerText = "");
-
+    
+        // 1. Подготовка интерфейса
+        submitBtn.disabled = true; // Блокируем кнопку сразу
+        
+        // Показываем модалку в режиме "Загрузка"
+        modalMessage.innerHTML = `
+            <div class="loader"></div>
+            <p class="modal-loading-text">Отправляем вашу заявку...</p>
+        `;
+        modalClose.style.display = "none"; // Прячем кнопку закрытия, чтобы не прервали
+        modal.style.display = "block";
+    
         const formData = new FormData(form);
-
+    
         try {
             const response = await fetch("/submit-lead/", {
                 method: "POST",
                 headers: { "X-CSRFToken": csrftoken },
                 body: formData,
             });
-
+    
             const result = await response.json();
-
+    
             if (result.success) {
-                modalMessage.innerText = result.message;
-                modal.style.display = "block";
+                // 2. Успех: меняем лоадер на галочку или текст
+                modalMessage.innerHTML = `
+                    
+                    <p style="text-align: center;">${result.message || "Заявка успешно сохранена!"}</p>
+                `;
                 form.reset();
             } else if (result.errors) {
+                // Ошибка валидации: закрываем модалку и показываем ошибки в полях
+                modal.style.display = "none";
                 for (const [field, msgs] of Object.entries(result.errors)) {
                     const errorDiv = form.querySelector(`#id_${field} + .field-error`);
                     if (errorDiv) errorDiv.innerText = msgs.join(", ");
                 }
-            } else {
-                modalMessage.innerText = result.message || "Произошла ошибка";
-                modal.style.display = "block";
             }
         } catch (err) {
-            modalMessage.innerText = "Ошибка соединения с сервером.";
-            modal.style.display = "block";
+            modalMessage.innerText = "Ошибка соединения с сервером. Попробуйте еще раз.";
             console.error(err);
+        } finally {
+            // В любом случае возвращаем кнопку закрытия и разблокируем кнопку (если нужно)
+            modalClose.style.display = "block";
+            if (!consentCheckbox.checked) {
+                submitBtn.disabled = true;
+            } else {
+                submitBtn.disabled = false;
+            }
         }
     });
 });

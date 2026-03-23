@@ -1,4 +1,12 @@
 User-agent: *
-Disallow:
 
+Disallow: /admin/
+Disallow: /login
+Disallow: /submit-lead/
+Disallow: /contact
+Disallow: /search
+Disallow: /*?* 
+Allow: /*?product=        
+
+# путь к карте сайта
 Sitemap: https://www.peskosheben.ru/sitemap.xml

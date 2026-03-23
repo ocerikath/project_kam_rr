@@ -63,6 +63,8 @@
 
 <section class="service-pricing">
     <h2>Стоимость доставки популярных материалов</h2>
+    
+    
 
     <div class="pricing-table">
 
@@ -116,7 +118,13 @@
         </div>
 
     </div>
-
+    <div class="pricing-top-actions">
+        <p>Не нашли нужный материал? Посмотрите полный перечень в нашем каталоге:</p>
+        <a href="{{ url_for('main.catalog') }}" class="catalog-link-btn">
+            <img src="{{ url_for('static', filename='images/icons/catalog-icon.png') }}" alt="иконка" class="btn-icon">
+            Перейти в полный каталог
+        </a>
+    </div>
     <p class="price-notice">
         В данном списке не все материалы, которые мы предоставляем. За нужным материалом свяжитесь с менеджерами нашей компании.
         Данный прайс-лист не является публичной офертой.  

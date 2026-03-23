@@ -219,7 +219,10 @@
           <span class="card-title">{{ product.name }}</span>
           <span class="card-price">от {{ product.price }}₽</span>
         </div>
-        <a href="#feedback" class="slide-btn">Заказать</a>
+          <a href="{{ url_for('main.index', product=product.name) }}#feedback" class="slide-btn">
+            Заказать
+        </a>
+        
       </div>
     {% endfor %}
   </div>
@@ -373,8 +376,8 @@ function init() {
         <input type="checkbox" id="consent">
         <span class="checkmark"></span>
         <span class="checkbox-text">
-          Согласен на <a href="#" target="_blank">обработку персональных данных</a>
-        </span>
+          Согласен на <a href="{{ url_for('main.privacy') }}" target="_blank">обработку персональных данных</a>
+      </span>
       </label>
       <div class="field-error"></div>
     </div>
@@ -491,6 +494,30 @@ function init() {
   </div>
 </div>
 
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+      // 1. Ищем параметры в URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const productName = urlParams.get('product');
+
+      // 2. Находим поле комментария в форме
+      const commentField = document.querySelector('textarea[name="comment"]');
+
+      if (productName && commentField) {
+          // Подставляем текст. Мы добавляем пробел в конце, чтобы клиент мог дописать объем
+          commentField.value = `Здравствуйте! Меня интересует: ${productName}. `;
+          
+          // Фокусируемся на поле, чтобы клиент сразу мог вводить данные
+          commentField.focus();
+
+          // 3. Плавно скроллим к форме, чтобы пользователь не потерялся
+          const feedbackSection = document.getElementById("feedback");
+          if (feedbackSection) {
+              feedbackSection.scrollIntoView({ behavior: "smooth" });
+          }
+      }
+  });
+</script>
 <script type="application/ld+json">
   {
     "@context": "https://schema.org",

@@ -190,3 +190,92 @@
   cursor: grabbing;
   user-select: none;
 }
+
+/* Основной контейнер */
+.catalog-help {
+  padding: 60px 20px;
+  background-color: #CFC8BA;;
+  border-top: 1px solid #e0e0e0;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.catalog-help__content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.catalog-help__icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.catalog-help__title {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.catalog-help__text {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+/* Блок с кнопками */
+.catalog-help__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Стиль телефона */
+.help-phone {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #000000;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+.help-phone:hover {
+  transform: scale(1.05);
+}
+
+/* Кнопка заявки */
+.help-form-btn {
+  display: inline-block;
+  background: #333;
+  color: #fff;
+  padding: 15px 35px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.help-form-btn:hover {
+  background: #A8947C;
+  box-shadow: 0 5px 15px rgba(168, 148, 124, 0.4);
+}
+
+.catalog-help__subtext {
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: #120d0d;
+}
+
+/* --- Адаптивность для десктопа (от 768px) --- */
+@media (min-width: 768px) {
+  .catalog-help__actions {
+      flex-direction: row;
+      justify-content: center;
+      gap: 30px;
+  }
+  
+  .catalog-help__title {
+      font-size: 2.2rem;
+  }
+}

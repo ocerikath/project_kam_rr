@@ -4,6 +4,7 @@ from .models import db, Category, Product, Lead
 from . import mail
 from app import mail 
 from flask_mail import Message
+from . import send_telegram
 
 main_bp = Blueprint('main', __name__)
 
@@ -83,11 +84,22 @@ def contact():
         db.session.add(lead)
         db.session.commit()
 
-        # ОТПРАВКА НА ПОЧТУ УБРАНА
+        # Формируем сообщение
+        tg_msg = (
+            f"<b>🔔 Новая заявка!</b>\n"
+            f"👤 Имя: {data.get('full_name')}\n"
+            f"📞 Тел: {data.get('phone')}\n"
+            f"📝 {data.get('comment')}"
+        )
+        
+        # Вызываем отправку
+        send_telegram(tg_msg)
 
-        return jsonify({"success": True, "message": "Заявка успешно отправлена!"})
+        return jsonify({"success": True, "message": "Заявка принята!"})
 
-    # Для GET-запроса просто рендерим страницу
+    # ТУТ УДАЛИ ТОТ ПУСТОЙ TRY/EXCEPT, КОТОРЫЙ БЫЛ РАНЕЕ
+
+    # Обычный GET запрос
     from types import SimpleNamespace
     form = SimpleNamespace(
         full_name=SimpleNamespace(value=''),
@@ -97,7 +109,10 @@ def contact():
     )
     return render_template('contact.html', form=form)
 
-
+@main_bp.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
+    
 @main_bp.route('/submit-lead/', methods=['POST'])
 def submit_lead():
     full_name = request.form.get('full_name', '').strip()
@@ -132,6 +147,20 @@ def submit_lead():
     db.session.add(lead)
     db.session.commit()
 
-    # ОТПРАВКА ПИСЕМ УБРАНА
+    # Добавляем отправку в Telegram здесь:
+    tg_msg = (
+        f"<b>🏗 Новая заявка (ПескоЩебень)</b>\n"
+        f"━━━━━━━━━━━━━━━━━━\n"
+        f"👤 <b>Имя:</b> {full_name}\n"
+        f"📞 <b>Телефон:</b> <code>{phone}</code>\n"
+        f"📧 <b>Email:</b> {email or 'не указан'}\n"
+        f"📝 <b>Запрос:</b> {comment}\n"
+        f"━━━━━━━━━━━━━━━━━━"
+    )
+    
+    try:
+        send_telegram(tg_msg)
+    except Exception as e:
+        print(f"Ошибка при вызове send_telegram: {e}")
 
     return jsonify({'success': True, 'message': 'Заявка успешно сохранена!'})

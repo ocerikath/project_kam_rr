@@ -903,3 +903,62 @@ main {
 }
 
 
+/* Анимация вращения */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #A8947C; /* Цвет под стиль твоего сайта */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+.modal-loading-text {
+    text-align: center;
+    font-weight: bold;
+    color: #4A4440;
+}
+
+/* Блокировка кнопки во время загрузки */
+#submitBtn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+
+.cookie-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 10px;
+    display: none; /* По умолчанию скрыто */
+    z-index: 9999;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    width: 90%;
+    max-width: 600px;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+
+.cookie-banner a { color: #A8947C; text-decoration: underline; }
+
+.cookie-banner button {
+    background: #A8947C;
+    border: none;
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 15px;
+}

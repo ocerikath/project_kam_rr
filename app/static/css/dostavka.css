@@ -339,3 +339,68 @@
         font-size: 1.4rem;
     }
 }
+
+/* Контейнер над таблицей */
+.pricing-top-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 15px 25px;
+    border-radius: 12px;
+    margin-top: 25px;
+    border-left: 4px solid #A8947C; /* Акцент в цвет бренда */
+}
+
+.pricing-top-actions p {
+    margin: 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Кнопка перехода */
+.catalog-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #A8947C;
+    color: #fff !important;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.catalog-link-btn:hover {
+    background-color: #8e7b65;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.catalog-link-btn .btn-icon {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1); /* Делает иконку белой, если она темная */
+}
+
+/* --- Адаптивность для мобильных (до 768px) --- */
+@media (max-width: 768px) {
+    .pricing-top-actions {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .pricing-top-actions p {
+        font-size: 0.95rem;
+    }
+
+    .catalog-link-btn {
+        width: 100%; /* На мобилках кнопка на всю ширину */
+        justify-content: center;
+        padding: 15px;
+    }
+}

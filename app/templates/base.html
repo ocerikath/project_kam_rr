@@ -274,7 +274,14 @@
             </div>
         </div>
     </footer>
-
+    
+    <div id="cookie-banner" class="cookie-banner">
+        <p>Мы используем файлы cookie, чтобы обеспечить вам лучший опыт на нашем сайте. 
+           Продолжая использовать сайт, вы соглашаетесь с нашей 
+           <a href="{{ url_for('main.privacy') }}">Политикой конфиденциальности</a>.
+        </p>
+        <button id="accept-cookies">Хорошо</button>
+    </div>
     <!-- Bootstrap JS Bundle с Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     {% block extra_js %}
@@ -350,6 +357,20 @@
                 nextActive.classList.add('active');
             }
         }
+        document.addEventListener("DOMContentLoaded", function() {
+            const banner = document.getElementById('cookie-banner');
+            const btn = document.getElementById('accept-cookies');
+
+            // Проверяем, есть ли в локальном хранилище отметка о согласии
+            if (!localStorage.getItem('cookieConsent')) {
+                banner.style.display = 'flex';
+            }
+
+            btn.addEventListener('click', function() {
+                localStorage.setItem('cookieConsent', 'true');
+                banner.style.display = 'none';
+            });
+        });
     </script>
     
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
