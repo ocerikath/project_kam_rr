@@ -159,6 +159,7 @@
 
 /* Адаптивность для стрелок */
 @media (max-width: 768px) {
+
   .slider-arrow {
     width: 36px;
     height: 36px;
@@ -269,6 +270,7 @@
 
 /* --- Адаптивность для десктопа (от 768px) --- */
 @media (min-width: 768px) {
+ 
   .catalog-help__actions {
       flex-direction: row;
       justify-content: center;
@@ -277,5 +279,17 @@
   
   .catalog-help__title {
       font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .help-phone {
+    font-size: 1rem;
+  }
+  .catalog-help__icon {
+    font-size: 2rem;
+  }
+  .help-form-btn {
+    padding: 5px 25px;
   }
 }

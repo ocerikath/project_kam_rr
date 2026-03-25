@@ -1,315 +1,114 @@
-:root {
-  --text-main: #3E3E3E;
-  --bg-light: #EAE6DC;
-  --accent: #A8947C;
-  --btn-bg: #CFC8BA;
-  --btn-hover: #8F735B;
-  --overlay: rgba(0, 0, 0, 0.45);
-  --radius: clamp(0.8rem, 2vw, 1.5rem);
-}
+import os
 
-.hero {
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  width: 100vw;
-  min-height: clamp(40vh, 50vh, 60vh);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  text-align: center;
-  color: #fff;
+def read_file(path):
+    with open(path, 'r', encoding='utf-8') as f:
+        return f.read()
 
-  /* Убираем отступы */
-  margin-top: -2.5rem !important;
-  margin-bottom: -2.5rem !important;
+def write_file(path, content):
+    with open(path, 'w', encoding='utf-8') as f:
+        f.write(content)
+
+dostavka_css = read_file('app/static/css/dostavka.css')
+index_css = read_file('app/static/css/index.css')
+contact_css = read_file('app/static/css/contact.css')
+desktop_css = read_file('app/static/css/desktop.css')
+style_css = read_file('app/static/css/style.css')
+
+map_section_dostavka = """/* Секция 4 "область нашей работы */
+.map-section {
+    padding: clamp(16px, 4vw, 32px);
+    text-align: center;
+    background-color: #EAE6DC;
+  }
   
-  /* фон */
-  background-image: url("../images/site_images/karyer_test2.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-/* затемнение */
-.hero__overlay {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--overlay);
-  z-index: 1;
-  backdrop-filter: brightness(0.8);
-}
-
-/* контент */
-.hero__content {
-  position: relative;
-  z-index: 2;
-  padding: clamp(1.5rem, 4vw, 3rem);
-  max-width: 600px;
-  animation: fadeIn 1s ease-out;
-}
-
-/* заголовок */
-.hero__title {
-  font-size: clamp(2rem, 7vw, 3rem);
-  font-weight: 700;
-  margin-bottom: clamp(0.8rem, 3vw, 1.2rem);
-  line-height: 1.2;
-}
-
-/* подзаголовок */
-.hero__subtitle {
-  font-size: clamp(1rem, 3.5vw, 1.3rem);
-  margin-bottom: clamp(1.5rem, 5vw, 2.5rem);
-  color: rgba(255, 255, 255, 0.9);
-}
-
-/* ---------- Кнопки ---------- */
-.btn {
-  display: inline-block;
-  text-decoration: none;
-  font-weight: 600;
-  padding: clamp(0.6rem, 2.5vw, 0.9rem) clamp(1.4rem, 6vw, 2.2rem);
-  border-radius: var(--radius);
-  transition: all 0.25s ease;
-  font-size: clamp(0.9rem, 3vw, 1rem);
-}
-
-.btn--primary {
-  background-color: var(--btn-bg);
-  color: var(--text-main);
-}
-
-.btn--primary:hover {
-  background-color: var(--btn-hover);
-  color: #fff;
-}
-
-.btn--secondary {
-  border: 1.5px solid var(--btn-bg);
-  color: #fff;
-  margin-left: clamp(0.8rem, 4vw, 1rem);
-}
-
-.btn--secondary:hover {
-  border-color: var(--btn-hover);
-  color: var(--btn-hover);
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-/* ---------- Анимация ---------- */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
+  .map-text h2 {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    margin-bottom: clamp(8px, 2vw, 16px);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .map-text p {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    margin-bottom: clamp(12px, 3vw, 20px);
+    color: #555;
   }
-}
+  
+  #map {
+    width: 100%;
+    height: clamp(300px, 60vh, 500px);
+    border-radius: clamp(8px, 2vw, 16px);
+    overflow: hidden;
+  }"""
 
+dostavka_css = dostavka_css.replace(map_section_dostavka, "")
 
-/* ---------- 2. Блок "О компании" ---------- */
-.about {
+map_section_desktop = """/* Секция "Область нашей работы" для десктопа (992px и выше) */
+@media (min-width: 992px) {
+    .map-section {
+      padding: 40px 20px;
+    }
+    
+    .map-text {
+      max-width: 800px;
+      margin: 0 auto 30px;
+    }
+    
+    .map-text h2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+    }
+    
+    .map-text p {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+    }
+    
+    #map {
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 500px;
+      border-radius: 16px;
+    }
+    
+    .map-section p[style*="font-size:14px"] {
+      font-size: 16px !important;
+      margin-top: 16px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
+  }"""
+dostavka_css = dostavka_css.replace(map_section_desktop, "")
+desktop_css = desktop_css.replace(map_section_desktop, "")
+
+map_section_index = """/* Секция 4 "область нашей работы */
+.map-section {
+  padding: clamp(16px, 4vw, 32px);
+  text-align: center;
   background-color: #EAE6DC;
-  color: #3E3E3E;
+}
+
+.map-text h2 {
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  margin-bottom: clamp(8px, 2vw, 16px);
+}
+
+.map-text p {
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  margin-bottom: clamp(12px, 3vw, 20px);
+  color: #555;
+}
+
+#map {
   width: 100%;
-  padding: clamp(4rem, 6vw, 3.5rem) clamp(1rem, 5vw, 2rem);
-}
-
-.about__inner {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.about__title {
-  font-size: clamp(1.6rem, 6vw, 2.2rem);
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: clamp(1rem, 4vw, 1.8rem);
-  color: #3E3E3E;
-}
-
-.about__text {
-  font-size: clamp(1rem, 3.5vw, 1.15rem);
-  line-height: 1.6;
-  margin-bottom: clamp(1rem, 3vw, 1.5rem);
-  text-align: justify;
-}
-
-.about__subtitle {
-  font-size: clamp(1.3rem, 4.5vw, 1.6rem);
-  font-weight: 600;
-  text-align: center;
-  margin-top: clamp(1.5rem, 5vw, 2rem);
-  margin-bottom: clamp(1.2rem, 4vw, 1.8rem);
-  color: #3E3E3E;
-}
-
-/* ---------- Преимущества ---------- */
-.advantages {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(0.8rem, 3vw, 1rem);
-}
-
-.adv-card {
-  display: flex;
-  align-items: center;
-  gap: clamp(0.8rem, 3vw, 1rem);
-  background-image: url("../images/site_images/individual.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  border-radius: clamp(0.8rem, 2vw, 1rem);
-  padding: clamp(0.9rem, 3vw, 1.3rem);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.adv-card:hover {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.adv-icon {
-  font-size: clamp(1.4rem, 5vw, 1.8rem);
-  color: #8F735B;
-  flex-shrink: 0;
-}
-
-.adv-text {
-  font-size: clamp(0.95rem, 3vw, 1.1rem);
-  color: #3E3E3E;
-}
-.adv-text {
-  display: block !important;
-}
-
-/* планшеты и выше */
-@media (min-width: 600px) {
-  .advantages {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Секция 3 "Наши достижения" */
-.achievements {
-  background: linear-gradient(180deg, #eae6dc 0%, #ffd478 100%);
-  padding: clamp(2rem, 6vw, 5rem) 0;
-  width: 100%;
-  border-radius: 20px;
-  margin-bottom: clamp(2rem, 6vw, 4rem);
-}
-
-.achievements__container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(1rem, 3vw, 2rem);
-  text-align: center;
-  color: #3E3E3E;
-}
-
-.achievements__title {
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  font-weight: 700;
-  margin-bottom: clamp(1rem, 3vw, 2rem);
-}
-
-.achievements__items {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: clamp(1.5rem, 5vw, 4rem);
-}
-
-.achievement {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.achievement__number {
-  font-size: clamp(2.5rem, 6vw, 5rem);
-  font-weight: 800;
-  color: #8F735B; /* акцент */
-  line-height: 1.1;
-}
-
-.achievement__text {
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
-  margin-top: clamp(0.3rem, 1vw, 0.6rem);
-}
-
-/* Секция 4 "Как с нами связаться" */
-.contacts {
-  background-color: #DCD6C9;
-  padding: clamp(2rem, 6vw, 5rem) 0;
-  width: 100%;
-  color: #3E3E3E;
-  border-radius: 20px;
-}
-
-.contacts__container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(1.5rem, 4vw, 3rem);
-  text-align: center;
-}
-
-.contacts__title {
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  font-weight: 700;
-}
-
-.contacts__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 45%, 400px), 1fr));
-  gap: clamp(1rem, 3vw, 2rem);
-  width: 100%;
-  max-width: 900px;
-}
-
-.contact-card {
-    background: #EAE6DC;
-    border-radius: 20px;
-    padding: clamp(1rem, 3vw, 2rem);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
-    margin: 10px;
-}
-
-.contact-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-}
-
-.contact-card__icon {
-  font-size: clamp(2rem, 4vw, 3rem);
-  margin-bottom: clamp(0.5rem, 2vw, 1rem);
-}
-
-.contact-card__title {
-  font-size: clamp(1.2rem, 3vw, 1.5rem);
-  font-weight: 600;
-  margin-bottom: clamp(0.3rem, 1vw, 0.6rem);
-}
-
-.contact-card__info {
-  font-size: clamp(1rem, 2.5vw, 1.3rem);
-  line-height: 1.4;
-}
+  height: clamp(300px, 60vh, 500px);
+  border-radius: clamp(8px, 2vw, 16px);
+  overflow: hidden;
+}"""
+index_css = index_css.replace(map_section_index, "")
 
 
-/* Секция 5 "Свяжитесь с нами" */
-.feedback {
+form_index = """.feedback {
   background-color: #EAE6DC;
   color: #3E3E3E;
   padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 5vw, 3rem);
@@ -673,7 +472,118 @@ textarea {
   color: #8F735B; /* лёгкий акцент при наведении */
 }
 
+/* Мобильный фикс для формы, чтобы страница не дергалась */
+@media (max-width: 768px) {
+  /* Убираем фиксированные отступы, делаем блок полностью адаптивным */
+  .feedback__container {
+    padding-bottom: env(safe-area-inset-bottom); /* для iOS */
+  }
+
+  #leadForm input,
+  #leadForm textarea {
+    font-size: 1rem; /* чуть больше, чтобы клавиатура не перекрывала */
+  }
+
+  /* Делаем форму полностью в потоке документа, убираем absolute / fixed */
+  #lead-section,
+  .form-background {
+    position: relative !important;
+  }
+}"""
+index_css = index_css.replace(form_index, "")
+contact_css = contact_css.replace(form_index, "")
+
+modal_index = """/* Модальное окно */
+#modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: clamp(1.5rem, 3vw, 2rem);
+  background: #fff;
+  border: 1px solid #8C7865;
+  border-radius: clamp(0.75rem, 1.5vw, 1rem);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  max-width: clamp(280px, 85%, 450px);
+  text-align: center;
+}
+
+#modal p {
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  color: #333;
+}
+
+#modal button {
+  padding: clamp(0.6rem, 1.2vw, 0.9rem) clamp(1.5rem, 3vw, 2rem);
+  font-size: clamp(0.95rem, 1.2vw, 1rem);
+  cursor: pointer;
+  border: none;
+  border-radius: clamp(0.5rem, 1vw, 0.75rem);
+  background: #8C7865;
+  color: #fff;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#modal button:hover {
+  background: #736455;
+  transform: translateY(-2px);
+}"""
+index_css = index_css.replace(modal_index, "")
+contact_css = contact_css.replace(modal_index, "")
+
+# Some extra cleanup for multiple media queries in index.css
+media_queries = """@media (min-width: 576px) {
+    .my-4 .container {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      max-width: none !important;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .my-4 .container {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      max-width: none !important;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .my-4 .container {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      max-width: none !important;
+    }
+  }
+  @media (min-width: 576px) {
+    .container, .container-sm {
+        max-width: none !important;
+    }
+}"""
+clean_media = """@media (min-width: 576px) {
+  .my-4 .container,
+  .container, 
+  .container-sm {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    max-width: none !important;
+  }
+}"""
+index_css = index_css.replace(media_queries, clean_media)
 
 
+style_css += "\n\n/* === Общие секции (карта, форма, модальное окно) === */\n"
+style_css += form_index
+style_css += "\n" + modal_index
+style_css += "\n" + map_section_index
+style_css += "\n" + map_section_desktop
 
-
+write_file('app/static/css/index.css', index_css)
+write_file('app/static/css/contact.css', contact_css)
+write_file('app/static/css/dostavka.css', dostavka_css)
+write_file('app/static/css/desktop.css', desktop_css)
+write_file('app/static/css/style.css', style_css)
+print("CSS files cleaned up successfully!")

@@ -430,43 +430,7 @@
     }
   }
 
-/* Секция "Область нашей работы" для десктопа (992px и выше) */
-@media (min-width: 992px) {
-    .map-section {
-      padding: 40px 20px;
-    }
-    
-    .map-text {
-      max-width: 800px;
-      margin: 0 auto 30px;
-    }
-    
-    .map-text h2 {
-      font-size: 2.2rem;
-      margin-bottom: 20px;
-    }
-    
-    .map-text p {
-      font-size: 1.5rem;
-      margin-bottom: 30px;
-    }
-    
-    #map {
-      max-width: 1200px;
-      margin: 0 auto;
-      height: 500px;
-      border-radius: 16px;
-    }
-    
-    .map-section p[style*="font-size:14px"] {
-      font-size: 16px !important;
-      margin-top: 16px;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.5;
-    }
-  }
+
 
 
  /* 1. Диапазон: Совсем узкие десктопы (992px - 1199px) */
